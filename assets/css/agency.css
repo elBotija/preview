@@ -21,14 +21,14 @@ p {
 }
 
 a {
-  color: #fed136;
+  color: var(--color-3);
 }
 a:hover {
-  color: #fec503;
+  color: var(--color-3);
 }
 
 .text-primary {
-  color: #fed136 !important;
+  color: var(--color-3) !important;
 }
 
 h1,
@@ -44,6 +44,10 @@ h6 {
 .qr-font{
   font-family: "Winter Beauty"
 }
+nav .qr-font p {
+  line-height: 2rem;
+  display: inline-block;
+} 
 .page-section {
   padding: 100px 0;
 }
@@ -67,12 +71,12 @@ h6 {
   }
 }
 ::-moz-selection {
-  background: #fed136;
+  background: var(--color-3);
   text-shadow: none;
 }
 
 ::selection {
-  background: #fed136;
+  background: var(--color-3);
   text-shadow: none;
 }
 
@@ -95,7 +99,7 @@ img::-moz-selection {
 }
 
 .btn-primary {
-  background-color: var(--color-3);
+  background-color: #26554b; 
   border-color: var(--color-1);
 }
 .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
@@ -107,9 +111,13 @@ img::-moz-selection {
   box-shadow: 0 0 0 0.2rem rgba(254, 209, 55, 0.5) !important;
 }
 
+
+
 #mainNav {
   background-color: #212529;
 }
+
+
 #mainNav .navbar-toggler {
   font-size: 12px;
   right: 0;
@@ -413,7 +421,7 @@ header.masthead .intro-text .intro-heading {
   color: #fff;
   border: 7px solid #e9ecef;
   border-radius: 100%;
-  background-color: #fed136;
+  background-color: var(--color-3);
 }
 .timeline > li .timeline-image h4 {
   font-size: 10px;
@@ -564,7 +572,7 @@ section#contact .form-group textarea.form-control {
   height: 248px;
 }
 section#contact .form-control:focus {
-  border-color: #fed136;
+  border-color: var(--color-3);
   box-shadow: none;
 }
 section#contact ::-webkit-input-placeholder {
@@ -624,7 +632,7 @@ ul.social-buttons li a {
   background-color: #212529;
 }
 ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons li a:hover {
-  background-color: #fed136;
+  background-color: var(--color-3);
 }
 
 /*# sourceMappingURL=agency.css.map */
@@ -651,9 +659,16 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
   font-family: 'Winter Beauty', sans-serif !important;
 }
 .navbar-brand{
-  color: #fff !important;
+  color: #103233 !important;
 }
 
+.nav-link {
+  color: #103233 !important;
+}
+
+.navbar-shrink .nav-link, .navbar-shrink .navbar-brand {
+  color: white !important;
+}
 
 
 .qmark.description {
@@ -723,4 +738,62 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 .qmark.description:hover:after,.qmark.description:hover:before {
   opacity: 1;
   transform: translateY(-3px)
+}
+
+.logo-icon {
+  width: 4rem;
+  height: 4rem;
+  display: inline-block;
+  mask: url("../img/logo.svg") no-repeat;
+  -webkit-mask: url("../img/logo.svg") no-repeat;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  background-color: #103233;
+}
+.bg-mask-center {
+  mask-position: center;
+  -webkit-mask-position: center;
+}
+
+.navbar-shrink .logo-icon {
+  background-color: white;
+}
+header.masthead .intro-text {
+  padding-top: 150px;
+}
+
+.intro-text .intro-heading p{
+  font-weight: 400;
+  font-size: 4rem;
+  line-height: 4.5rem;
+}
+
+.intro-text .box{
+  background-color: rgba(55, 89, 90, .7) !important;
+  background-color: rgba(121 122 122 / 70%) !important;
+  padding: 0 2rem;
+}
+.wp-icon{
+  padding: 1.1rem 1.2rem !important;
+}
+
+.add-colibri{
+  position: relative;
+}
+
+.add-colibri::after{
+  content: url(../img/colibri.svg);
+  display:block;
+  width: 2rem;
+  height: 2rem;
+  display: inline-block;
+  mask: url("../img/colibri.svg") no-repeat;
+  -webkit-mask: url("../img/colibri.svg") no-repeat;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  background-color: #ac6a5e;
+  position: absolute;
+  top: -3px;
+  right: 0;
+  transform: translateX(75%);
 }
