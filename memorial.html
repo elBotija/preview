@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+     <!-- Bootstrap core CSS -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/agency.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Queriendo Recordar - Juan Pérez</title>
     <style>
@@ -114,10 +117,10 @@
     }
 
     .image-caption {
-        text-align: center;
+        text-align: left;
         color: #333;
         font-size: 1.1rem;
-        padding-top: 1rem;
+        padding-top: .5rem;
         font-weight: 500;
         /* Aseguramos que el caption tenga su propio espacio */
         position: relative;
@@ -131,7 +134,7 @@
     }
 
     .image-caption {
-        text-align: center;
+        text-align: left;
         color: #2e4f47;
         /* Aseguramos que el caption tenga suficiente espacio */
         min-height: 30px;
@@ -139,14 +142,13 @@
     }
 
         .image-caption {
-            margin-top: 10px;
-            color: #2e4f47;
+            color: #fff;
         }
         .video-section {
             margin-top: 40px;
         }
         .video-container {
-            margin-bottom: 30px;
+            margin-bottom: 15px;
             /*background-color: #f5f5f5;
             padding: 20px;
             border-radius: 8px;
@@ -247,24 +249,25 @@ body{
 </head>
 <body>
 
-  <section class="flex flex-col md:flex-row items-center justify-between min-h-screen mb-16">
-    <div class="w-full md:w-1/2 p-8 md:p-16">
-        <strong class="block w-full text-center">1955 - 2023</strong>
-        <h1 class="text-4xl md:text-6xl mb-6">Juan Pérez</h1>
+<section class="flex flex-col md:flex-row items-strech justify-between header-image pt-0 pb-0 ">
+    <div class="w-full md:w-5/12 px-24 py-32">
+        <img src="./fotoperfil.jpg" alt="Banner" class="object-cover w-full h-full rounded-[100%]">
+    </div>
+    <div class="w-full md:w-7/12 px-8 md:px-16 py-32">
+        <strong class="block w-full text-left">1955 - 2023</strong>
+        <h1 class="text-4xl md:text-6xl mb-6 text-left">Juan Pérez</h1>
         <p class="text-xl mb-6"> Juan Pérez fue un hombre extraordinario cuya vida estuvo marcada por el amor a su familia y la dedicación a su trabajo.</p>
         <p class="mb-6">Conoció a su esposa Carla a los 22 años, y después de dos años de un romance lleno de aventuras y complicidad, decidieron unir sus vidas en matrimonio. De esta unión nacieron sus dos adorados hijos, Elina y Francisco, quienes se convirtieron en el centro de su universo.</p>
         <p class="mb-6">En el ámbito profesional, Juan se destacó como un empleado bancario comprometido y respetado por sus colegas. Pero más allá de su carrera, Juan era conocido por su lealtad inquebrantable hacia sus amigos. Felipe y Ernesto, sus amigos inseparables, compartieron con él las alegrías y los momentos difíciles, creando un vínculo que trascendió el tiempo y las circunstancias. Juan Pérez dejó una huella imborrable en todos los que tuvieron la fortuna de conocerlo, y su recuerdo vivirá eternamente en nuestros corazones.</p>
         <a href="#momentos" class=" inline-block px-6 py-3 text-lg font-bold text-white uppercase btn-primary rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out">Momentos</a>
     </div>
-    <div class="w-full md:w-1/2 h-screen">
-        <img src="./fotoperfil.jpg" alt="Banner" class="object-cover w-full h-full">
-    </div>
 </section>
 
-    <main class="container main-content">
+<div class="bg-[#97A886]">
+    <main class="container main-content bg-[#97A886]">
 
-        <h2 id="momentos" class="text-4xl mb-16">Momentos</h2>
-        <div class="image-gallery mb-16">
+        <h2 id="momentos" class="text-4xl mb-4 text-white">Momentos</h2>
+        <div class="image-gallery mb-16 border-b border-t border-color-white py-8">
             <div class="image-item h-56">
                 <img src="1.jpg" class="object-cover w-full h-full rounded-lg cursor-pointer hover:animate-pulse shadow-xl" alt="Juan de niño" onclick="openModal(this)">
                 <div class="image-caption">Juan en su infancia</div>
@@ -291,25 +294,37 @@ body{
             </div>
         </div>
 
-        <h2 class="text-4xl mb-16">Videos</h2>
-        <div class="video-section">
-            <div class="video-container">
-                <video controls>
-                    <source src="video1.mp4" type="video/mp4">
-                    Tu navegador no soporta el elemento de video.
-                </video>
-            </div>
-            <div class="video-container">
-                <video controls>
-                    <source src="video2.mp4" type="video/mp4">
-                    Tu navegador no soporta el elemento de video.
-                </video>
-            </div>
-        </div>
     </main>
 
+    <div class="bg-[#A9C0B0]">
+        <div class="container main-content py-16">
+            <h2 class="text-4xl text-white">Videos</h2>
+            <div class="video-section border-b border-t py-8 grid grid-cols-2 gap-8 justify-between">
+                <div>
+                    <div class="video-container">
+                        <video controls>
+                            <source src="video1.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento de video.
+                        </video>
+                    </div>
+                    <h2 class="text-white text-left text-xl">Bailando</h2>
+                </div>
+                <div>
+                    <div class="video-container">
+                        <video controls>
+                            <source src="video2.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento de video.
+                        </video>
+                    </div>
+                    <h2 class="text-white text-left text-xl">Vacaciones en Rio</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
      <!-- Footer -->
-  <footer class="footer bg-[#b8c4ba]" >
+  <footer class="footer bg-[#b8c4ba] py-0" >
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-4 text-center">

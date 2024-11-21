@@ -797,3 +797,30 @@ header.masthead .intro-text {
   right: 0;
   transform: translateX(75%);
 }
+
+.header-image{
+  position: relative;
+  z-index: 1;
+}
+.header-image::before{
+  content:"";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  background-color:#EAF3E0;
+}
+
+.header-image::after {
+  content: "";
+  background: url("../img/header.png");
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  z-index: -1;
+}
