@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Queriendo Recordar - Juan Pérez</title>
     <style>
@@ -161,7 +162,7 @@
             height: auto;
             margin-bottom: -5px;
         }
-        footer {
+        /* footer {
             background-color: #2e4f47;
             color: #f5f5f5;
             text-align: center;
@@ -171,7 +172,7 @@
         footer a {
             color: #f5f5f5;
             text-decoration: none;
-        }
+        } */
         .modal {
             display: none;
             position: fixed;
@@ -307,16 +308,60 @@ body{
         </div>
     </main>
 
-    <footer>
-        <div class="container">
-            <p><a href="#">Términos y condiciones</a> | <a href="#">AFIP-DG</a></p>
+     <!-- Footer -->
+  <footer class="footer bg-[#b8c4ba]" >
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-4 text-center">
+          <span class="copyright">Copyright &copy; Quiero Recordarte 2024</span>
         </div>
-    </footer>
+        <!-- Social Media -->
+        <div class="col-md-4">
+          <ul class="list-inline social-buttons">
+
+            <li class="list-inline-item">
+
+              <a href="https://twitter.com">
+                <i class="fab fa-twitter"></i>
+              </a>
+
+            </li>
+
+            <li class="list-inline-item">
+
+              <a href="https://facebook.com">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+
+            </li>
+
+
+            <li class="list-inline-item">
+
+              <a href="https://instagram.com">
+                <i class="fab fa-instagram"></i>
+              </a>
+
+            </li>
+
+          </ul>
+        </div>
+        <!-- Legal -->
+        <div class="col-md-4">
+          <ul class="list-inline quicklinks text-center">
+            <li class="list-inline-item">
+              <a href="legal">Términos y condiciones</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
 
     <div id="imageModal" style="display: none" class="modal">
       <span class="close" onclick="closeModal()">&times;</span>
       <img class="modal-content" id="modalImage">
-  </div>
+    </div>
 
   <script>
       function openModal(img) {
