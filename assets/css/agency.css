@@ -847,3 +847,65 @@ header.masthead .intro-text {
 :focus{
   outline: none !important;
 }
+
+
+/* Ajustes para el navbar principal */
+#mainNav {
+  transition: all 0.3s ease-in-out;
+  background-color: transparent;
+}
+
+#mainNav.navbar-shrink {
+  background-color: #212529;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Asegurar que la transición del fondo sea suave */
+@media (min-width: 992px) {
+  #mainNav {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    transition: all 0.3s ease-in-out;
+    background-color: transparent;
+  }
+
+  #mainNav.navbar-shrink {
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: #212529;
+  }
+
+  /* Ajustar las transiciones de los elementos del navbar */
+  #mainNav .navbar-brand,
+  #mainNav .nav-link,
+  #mainNav .logo-icon {
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Asegurar que los colores cambien correctamente */
+  #mainNav:not(.navbar-shrink) .nav-link {
+    color: #103233 !important;
+  }
+
+  #mainNav:not(.navbar-shrink) .navbar-brand {
+    color: #103233 !important;
+  }
+
+  #mainNav:not(.navbar-shrink) .logo-icon {
+    background-color: #103233;
+  }
+
+  #mainNav.navbar-shrink .nav-link,
+  #mainNav.navbar-shrink .navbar-brand {
+    color: white !important;
+  }
+
+  #mainNav.navbar-shrink .logo-icon {
+    background-color: white;
+  }
+}
+
+/* Asegurar que el fondo sea completamente transparente cuando no está en shrink */
+#mainNav:not(.navbar-shrink) {
+  background-color: transparent !important;
+}
