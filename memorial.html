@@ -3,325 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-     <!-- Bootstrap core CSS -->
+      <!-- Bootstrap core CSS -->
   <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="assets/css/all.min.css" rel="stylesheet" type="text/css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700
+" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
+    type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+  <link href='https://sliderm.com/dist/1.0.7/sliderm.css' rel='stylesheet' type='text/css'>
+  
+  <script src="https://sliderm.com/dist/1.0.7/sliderm.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.5/cdn.min.js" defer></script>
+  <style>
+    [x-cloak] { display: none !important; }
+  </style>
+  <!-- Custom styles for this theme -->
+  <!--<link href="assets/css/agency.min.css" rel="stylesheet">-->
   <link href="assets/css/agency.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Queriendo Recordar - Juan Pérez</title>
-    <style>
-        body {
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            margin: 0;
-            padding: 0;
-            /*background-color: #f4f1e8;*/
-            color: #0a2422;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        header {
-            background-color: #0a2422;
-            color: #f4f1e8;
-            padding: 15px 0;
-        }
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        nav ul {
-            display: flex;
-            list-style-type: none;
-        }
-        nav ul li {
-            margin-left: 20px;
-        }
-        nav ul li a {
-            color: #f5f5f5;
-            text-decoration: none;
-            font-weight: 300;
-        }
-        .main-content {
-            /* background-color: #f4f1e8; */
-            padding: 40px;
-            /* border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1); */
-        }
-        h1, h2 {
-            text-align: center;
-            color: #2e4f47;
-        }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 30px;
-        }
-        h2 {
-            font-size: 2em;
-            margin-top: 40px;
-        }
-        p {
-            line-height: 1.6;
-            color: #0a2422;
-        }
-        .moments-title {
-        color: #0a4742;
-        font-size: 2.5rem;
-        text-align: center;
-        margin: 3rem 0;
-        font-weight: 600;
-    }
-
-    .image-gallery {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-        padding: 0 2rem;
-        margin-bottom: 4rem;
-    }
-    
-    .image-item {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        /* Agregamos margin-bottom para separar las filas */
-        margin-bottom: 3rem;
-    }
-
-    .image-wrapper {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 16/9; /* Mantiene una proporción consistente */
-        overflow: hidden;
-        margin-bottom: 1rem;
-        /* Restauramos el sombreado y redondeado */
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-
-    .image-wrapper img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        cursor: pointer;
-        border-radius: 8px;
-    }
-
-    .image-wrapper img:hover {
-        transform: scale(1.05);
-        box-shadow: 0 6px 12px rgba(0,0,0,0.5);
-    }
-
-    .image-caption {
-        text-align: left;
-        color: #333;
-        font-size: 1.1rem;
-        padding-top: .5rem;
-        font-weight: 500;
-        /* Aseguramos que el caption tenga su propio espacio */
-        position: relative;
-        background: transparent;
-    }
-    .modal-content {
-        max-width: 90%;
-        max-height: 90vh;
-        object-fit: contain;
-        margin: auto;
-    }
-
-    .image-caption {
-        text-align: left;
-        color: #2e4f47;
-        /* Aseguramos que el caption tenga suficiente espacio */
-        min-height: 30px;
-        font-weight: 500;
-    }
-
-        .image-caption {
-            color: #fff;
-        }
-        .video-section {
-            margin-top: 40px;
-        }
-        .video-container {
-            margin-bottom: 15px;
-            /*background-color: #f5f5f5;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #617c67;*/
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-            transition: box-shadow 0.3s ease;
-        }
-        .video-container:hover {
-            box-shadow: 0 6px 12px rgba(0,0,0,0.8);
-        }
-        video {
-            width: 100%;
-            height: auto;
-            margin-bottom: -5px;
-        }
-        /* footer {
-            background-color: #2e4f47;
-            color: #f5f5f5;
-            text-align: center;
-            padding: 15px 0;
-            margin-top: 40px;
-        }
-        footer a {
-            color: #f5f5f5;
-            text-decoration: none;
-        } */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(255,255,255,0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-content {
-            display: block;
-            max-width: 90%;
-            max-height: 90%;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-        
-        }
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #363535;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        .close:hover,
-        .close:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .btn-primary:hover {
-    background-color: #516956 !important;
-    border-color: var(--color-1) !important;
-    color: white;
-}
-
-:root {
-  --color-1: #0a2422; /* Primer color de la izquierda en la imagen */
-  --color-2: #2e4f47; /* Segundo color en la imagen */
-  --color-3: #617c67; /* Tercer color en la imagen */
-  --color-4: #83624a; /* Cuarto color en la imagen */
-}
-
-.btn-primary {
-    background-color: var(--color-3);
-    border-color: var(--color-1);
-}
-
-
-
-body{
-    background-color: #d6cbab;
-    background-image: url("./overlay.png"), -moz-linear-gradient(45deg, #d6cbab 15%, #f4f1e8 85%);
-    background-image: url(./overlay.png), -webkit-linear-gradient(45deg, #d6cbab 15%, #f4f1e8 85%);
-    background-image: url("./overlay.png"), -ms-linear-gradient(45deg, #d6cbab 15%, #f4f1e8 85%);
-    background-image: url(./overlay.png), linear-gradient(45deg, #d6cbab 15%, #f4f1e8 85%);
-}
-
-/* p{color: rgba(255, 255, 255, 0.65) !important;} */
-    </style>
 </head>
 <body>
 
-<section class="flex flex-col md:flex-row items-strech justify-between header-image pt-0 pb-0 ">
-    <div class="w-full md:w-5/12 px-24 py-32">
-        <img src="./fotoperfil.jpg" alt="Banner" class="object-cover w-full h-full rounded-[100%]">
+<section class="my-0 py-0">
+  <div 
+    class="w-full h-[60vh] bg-cover bg-center bg-top bg-no-repeat" 
+    style="background-image: url('./assets/img/memorialexample/portada.png');"
+  >
+  </div>
+  <!-- <img src="./assets/img/memorialexample/portada.png"/> -->
+  <div class="flex justify-center items-end gap-4 pb-12 -mt-8 mx-40">
+    <div class="!min-w-[18rem] !min-h-[18rem] !max-w-[18rem] !max-h-[18rem] rounded-[100%] overflow-hidden shadow-md">
+      <img src="assets/img/memorialexample/perfil.png"/>
     </div>
-    <div class="w-full md:w-7/12 px-8 md:px-16 py-32">
-        <strong class="block w-full text-left">1955 - 2023</strong>
-        <h1 class="text-4xl md:text-6xl mb-6 text-left">Juan Pérez</h1>
-        <p class="text-xl mb-6"> Juan Pérez fue un hombre extraordinario cuya vida estuvo marcada por el amor a su familia y la dedicación a su trabajo.</p>
-        <p class="mb-6">Conoció a su esposa Carla a los 22 años, y después de dos años de un romance lleno de aventuras y complicidad, decidieron unir sus vidas en matrimonio. De esta unión nacieron sus dos adorados hijos, Elina y Francisco, quienes se convirtieron en el centro de su universo.</p>
-        <p class="mb-6">En el ámbito profesional, Juan se destacó como un empleado bancario comprometido y respetado por sus colegas. Pero más allá de su carrera, Juan era conocido por su lealtad inquebrantable hacia sus amigos. Felipe y Ernesto, sus amigos inseparables, compartieron con él las alegrías y los momentos difíciles, creando un vínculo que trascendió el tiempo y las circunstancias. Juan Pérez dejó una huella imborrable en todos los que tuvieron la fortuna de conocerlo, y su recuerdo vivirá eternamente en nuestros corazones.</p>
-        <a href="#momentos" class=" inline-block px-6 py-3 text-lg font-bold text-white uppercase btn-primary rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out">Momentos</a>
+    <div class="text-[#56664B] font-montserrat ">
+      <h2 class="text-4xl font-[500] uppercase">Ignacio Gastón de la Pérgola</h2>
+      <span class="text-3xl">1990-2024</span>
+      <p class="text-3xl font-[300]">Cementerio de la Chacarita</p>
+      <p class="text-xl font-[300]"><i class="fas fa-map-pin pr-1"></i> Sección 2, Manzana 9, Tablón 13</p>
+      <p class="text-lg font-[300]"><i class="fas fa-map-marker-alt pr-0"></i> Av. Guzmán 680, C1427 Cdad. Autónoma de Buenos Aires</p>
+      <span class="text-xl font-[400]">«Sean gratas las palabras de mi boca y la meditación de mi corazón delante de ti, oh Señor, mi roca y mi redentor.»</span>
     </div>
+  </div>
+</section>
+<section class="my-0 bg-[#8B6951] text-white px-40 pt-12 pb-14 font-montserrat">
+  <h2 class="text-5xl font-[300] text-center pb-6">Historia</h2>
+  <p class="text-xl font-[300] border-t border-b py-4 leading-8">Ignacio fue un hombre extraordinario cuya vida estuvo marcada por el amor a su familia.
+    Conoció a su esposa Carla a los 22 años, y después de dos años de un romance lleno de aventuras 
+    y complicidad, Decidieron unir sus vidas en matrimonio. Luego nacieron sus dos adoradas hijas, 
+    Elena y Sofía, quienes se convirtieron en el centro de su universo.
+    Juan era conocido por su lealtad inquebrantable hacia sus amigos. Felipe y Ernesto, sus amigos inseparables, 
+    compartieron con él las alegrías y los momentos difíciles, creando un vínculo que trascendió el tiempo y las 
+    circunstancias. Ignacio dejó una huella imborrable en todos los que tuvieron la fortuna de conocerlo, y su recuerdo
+     vivirá eternamente en nuestros corazones.</p>
 </section>
 
-<div class="bg-[#97A886]">
-    <main class="container main-content bg-[#97A886]">
+<section class="my-0 bg-[#97A886] text-[#333333] px-40 pt-12 pb-14 font-montserrat">
+  <h2 class="text-5xl font-[300] text-center pb-6">Momentos</h2>
+  
+  <div class="border-[#333333] border-t border-b py-4">
+    <div x-data="{
+      photos: [
+        { src: './assets/img/memorialexample/esposa.png', caption: 'Su esposa Carla' },
+        { src: './assets/img/memorialexample/hijas.png', caption: 'Sus hijas, Elena y Sofía' },
+        { src: './assets/img/memorialexample/mascotas.png', caption: 'Su perro Sam y su gato Frodo' },
+        { src: './assets/img/memorialexample/padres.png', caption: 'Sus padres, José y Liliana' }
+      ],
+      lightboxOpen: false,
+      currentIndex: 0
+    }" class="gallery-container">
 
-        <h2 id="momentos" class="text-4xl mb-4 text-white">Momentos</h2>
-        <div class="image-gallery mb-16 border-b border-t border-color-white py-8">
-            <div class="image-item h-56">
-                <img src="1.jpg" class="object-cover w-full h-full rounded-lg cursor-pointer hover:animate-pulse shadow-xl" alt="Juan de niño" onclick="openModal(this)">
-                <div class="image-caption">Juan en su infancia</div>
+      <!-- Galería -->
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <template x-for="(photo, index) in photos" :key="index">
+            <div class="space-y-3">
+              <div class="image-container" @click="lightboxOpen = true; currentIndex = index">
+                <img :src="photo.src" 
+                     :alt="photo.caption"
+                     class="w-full h-72 object-cover cursor-pointer rounded-lg">
+              </div>
+              <h2 x-text="photo.caption" 
+                  class="text-xl font-[400] text-[#333] font-montserrat font-light">
+              </h2>
             </div>
-            <div class="image-item h-56">
-                <img src="2.jpg" class="object-cover w-full h-full rounded-lg cursor-pointer hover:animate-pulse shadow-xl" alt="Juan de joven" onclick="openModal(this)">
-                <div class="image-caption">Juan en su juventud</div>
-            </div>
-            <div class="image-item h-56">
-                <img src="3.jpg" class="object-cover w-full h-full rounded-lg cursor-pointer hover:animate-pulse shadow-xl" alt="Juan y Carla en su boda" onclick="openModal(this)">
-                <div class="image-caption">Boda de Juan y Carla</div>
-            </div>
-            <div class="image-item h-56">
-                <img src="4.jpg" class="object-cover w-full h-full rounded-lg cursor-pointer hover:animate-pulse shadow-xl" alt="Juan con Elina y Francisco" onclick="openModal(this)">
-                <div class="image-caption">Juan con sus hijos</div>
-            </div>
-            <div class="image-item h-56">
-                <img src="5.jpg" class="object-cover w-full h-full rounded-lg cursor-pointer hover:animate-pulse shadow-xl" alt="Juan con Felipe y Ernesto" onclick="openModal(this)">
-                <div class="image-caption">Juan con sus amigos</div>
-            </div>
-            <div class="image-item h-56">
-                <img src="6.jpg" class="object-cover w-full h-full rounded-lg cursor-pointer hover:animate-pulse shadow-xl" alt="Juan en su trabajo" onclick="openModal(this)">
-                <div class="image-caption">Juan en el banco</div>
-            </div>
+          </template>
         </div>
+      </div>
 
-    </main>
-
-    <div class="bg-[#A9C0B0]">
-        <div class="container main-content py-16">
-            <h2 class="text-4xl text-white">Videos</h2>
-            <div class="video-section border-b border-t py-8 grid grid-cols-2 gap-8 justify-between">
-                <div>
-                    <div class="video-container">
-                        <video controls>
-                            <source src="video1.mp4" type="video/mp4">
-                            Tu navegador no soporta el elemento de video.
-                        </video>
-                    </div>
-                    <h2 class="text-white text-left text-xl">Bailando</h2>
-                </div>
-                <div>
-                    <div class="video-container">
-                        <video controls>
-                            <source src="video2.mp4" type="video/mp4">
-                            Tu navegador no soporta el elemento de video.
-                        </video>
-                    </div>
-                    <h2 class="text-white text-left text-xl">Vacaciones en Rio</h2>
-                </div>
-            </div>
+      <!-- Modal Lightbox -->
+      <div x-show="lightboxOpen"
+           x-cloak
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0"
+           x-transition:enter-end="opacity-100"
+           x-transition:leave="transition ease-in duration-300"
+           x-transition:leave-start="opacity-100"
+           x-transition:leave-end="opacity-0"
+           class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90"
+           @click.self="lightboxOpen = false">
+        
+        <div class="relative max-w-5xl mx-auto">
+          <!-- Imagen actual -->
+          <img :src="photos[currentIndex].src" 
+               :alt="photos[currentIndex].caption"
+               class="max-h-[85vh] w-auto mx-auto">
+          
+          <!-- Botones de navegación -->
+          <button @click="if(currentIndex > 0) currentIndex--" 
+                  class="absolute left-4 top-1/2 -translate-y-1/2 text-5xl hover:text-gray-300"
+                  x-show="currentIndex > 0">
+                  <span class=" h-10 w-10 bg-[#26554b] text-white flex justify-center items-center rounded-full"> <span class="sliderm__icon-left--regular text-2xl"></span> </span>
+          </button>
+          
+          <button @click="if(currentIndex < photos.length - 1) currentIndex++" 
+                  class="absolute right-4 top-1/2 -translate-y-1/2 text-5xl hover:text-gray-300"
+                  x-show="currentIndex < photos.length - 1">
+                  <span class=" h-10 w-10 bg-[#26554b] text-white flex justify-center items-center rounded-full"> <span class="sliderm__icon-right--regular text-2xl"></span> </span>
+          </button>
+  
+          <!-- Botón cerrar -->
+          <button @click="lightboxOpen = false" 
+                  class="absolute top-2 right-2 text-white text-lg hover:text-gray-300">
+                  <span class=" h-6 w-6 bg-[#26554b] text-white font-light flex justify-center items-center rounded-full"> 
+                    <i class="fas fa-times"></i>
+                  </span>
+          </button>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+<section class="my-0 bg-[#A9C0B0] text-[#333333] px-40 pt-12 pb-14 font-montserrat">
+  <h2 class="text-5xl font-[300] text-center pb-6">Videos de Ignacio</h2>
+  
+  <div class="border-[#333333] border-t border-b py-4">
+      <!-- Galería -->
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+            <div class="space-y-3">
+              <div class="video-container" >
+                <video controls class=" w-full">
+                  <source src="video1.mp4" type="video/mp4">
+                  Tu navegador no soporta el elemento de video.
+                </video>
+              </div>
+              <h2 class="text-xl font-[400] text-[#333] font-montserrat font-light">
+                Bailando
+              </h2>
+            </div>
+
+            <div class="space-y-3">
+              <div class="video-container" >
+                <video controls class=" w-full">
+                  <source src="video1.mp4" type="video/mp4">
+                  Tu navegador no soporta el elemento de video.
+                </video>
+              </div>
+              <h2 class="text-xl font-[400] text-[#333] font-montserrat font-light">
+                Vacaciones en la Polinesia
+              </h2>
+            </div>
+          
+        </div>
+      </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
 
      <!-- Footer -->
   <footer class="footer bg-[#b8c4ba] py-0" >
@@ -332,34 +200,7 @@ body{
         </div>
         <!-- Social Media -->
         <div class="col-md-4">
-          <ul class="list-inline social-buttons">
-
-            <li class="list-inline-item">
-
-              <a href="https://twitter.com">
-                <i class="fab fa-twitter"></i>
-              </a>
-
-            </li>
-
-            <li class="list-inline-item">
-
-              <a href="https://facebook.com">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-
-            </li>
-
-
-            <li class="list-inline-item">
-
-              <a href="https://instagram.com">
-                <i class="fab fa-instagram"></i>
-              </a>
-
-            </li>
-
-          </ul>
+          
         </div>
         <!-- Legal -->
         <div class="col-md-4">
@@ -400,5 +241,19 @@ body{
       }
   
   </script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+  
+    <!-- Plugin JavaScript -->
+    <script src="assets/js/jquery.easing.min.js"></script>
+  
+    <!-- Contact form JavaScript -->
+    <script src="assets/js/jqBootstrapValidation.js"></script>
+    <script src="assets/js/contact_me.js"></script>
+  
+    <!-- Custom scripts for this template -->
+    <script src="assets/js/agency.min.js"></script>
 </body>
 </html>

@@ -41,6 +41,10 @@ h6 {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+.font-montserrat{
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
 .qr-font{
   font-family: "Winter Beauty"
 }
@@ -758,6 +762,16 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 .navbar-shrink .logo-icon {
   background-color: white;
 }
+
+.intro-heading .logo-icon {
+  background: url("../img/logoalpha.png") no-repeat;
+  background-color: rgba(0,0,0,0) !important;
+  background-position: center;
+  background-size: contain;
+  mask:inherit;
+  -webkit-mask: inherit;
+
+}
 header.masthead .intro-text {
   padding-top: 150px;
 }
@@ -823,4 +837,13 @@ header.masthead .intro-text {
   height: 100%;
   opacity: 0.1;
   z-index: -1;
+}
+
+.sliderm__button--next, .sliderm__button--previous{
+  height: 3rem;
+  width: 3rem;
+}
+
+:focus{
+  outline: none !important;
 }
