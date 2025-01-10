@@ -118,7 +118,7 @@ img::-moz-selection {
 
 
 #mainNav {
-  background-color: #212529;
+  background-color: #e1e5ce;
 }
 
 
@@ -173,7 +173,7 @@ img::-moz-selection {
   #mainNav.navbar-shrink {
     padding-top: 0;
     padding-bottom: 0;
-    background-color: #212529;
+    background-color: #e1e5ce;
   }
   #mainNav.navbar-shrink .navbar-brand {
     font-size: 1.25em;
@@ -183,7 +183,7 @@ img::-moz-selection {
 header.masthead {
   text-align: center;
   color: rgb(255, 255, 255);
-  background-image: url("../img/overlay.png"), url("../img/header.png");
+  background-image: url("../img/overlay.png"), url("../img/header.jpeg");
   background-repeat: no-repeat;
   background-color: #545147;
   background-attachment: scroll;
@@ -671,7 +671,7 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 }
 
 .navbar-shrink .nav-link, .navbar-shrink .navbar-brand {
-  color: white !important;
+  color: #103233 !important;
 }
 
 
@@ -760,7 +760,7 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 }
 
 .navbar-shrink .logo-icon {
-  background-color: white;
+  background-color: #103233 !important;
 }
 
 .intro-heading .logo-icon {
@@ -805,7 +805,7 @@ header.masthead .intro-text {
   -webkit-mask: url("../img/colibri.svg") no-repeat;
   mask-size: contain;
   -webkit-mask-size: contain;
-  background-color: #ac6a5e;
+  background-color: #1f3f45;
   position: absolute;
   top: -3px;
   right: 0;
@@ -822,7 +822,7 @@ header.masthead .intro-text {
   height: 100%;
   position: absolute;
   z-index: -1;
-  background-color:#EAF3E0;
+  background-color:#e1e5ce;
 }
 
 .header-image::after {
@@ -856,7 +856,7 @@ header.masthead .intro-text {
 }
 
 #mainNav.navbar-shrink {
-  background-color: #212529;
+  background-color: #e1e5ce;
   transition: all 0.3s ease-in-out;
 }
 
@@ -872,7 +872,7 @@ header.masthead .intro-text {
   #mainNav.navbar-shrink {
     padding-top: 0;
     padding-bottom: 0;
-    background-color: #212529;
+    background-color: #e1e5ce;
   }
 
   /* Ajustar las transiciones de los elementos del navbar */
@@ -897,7 +897,7 @@ header.masthead .intro-text {
 
   #mainNav.navbar-shrink .nav-link,
   #mainNav.navbar-shrink .navbar-brand {
-    color: white !important;
+    color: #103233 !important;
   }
 
   #mainNav.navbar-shrink .logo-icon {
