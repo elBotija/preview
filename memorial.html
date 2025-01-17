@@ -52,9 +52,33 @@
   <!-- Custom styles for this theme -->
   <!--<link href="assets/css/agency.min.css" rel="stylesheet">-->
   <link href="assets/css/agency.css" rel="stylesheet">
+  <style>
+    .collapse.navbar-collapse {
+      visibility: inherit;
+    }
+  </style>
 </head>
 <body>
-
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-shrink " style="background: #e1e5ce !important" id="mainNav">
+    <div class=" container ">
+    <a class="navbar-brand js-scroll-trigger qr-font flex items-center" href="#page-top"> 
+      <span class="logo-icon h-10 w-10"></span> 
+      <p class="pl-2 mb-0">Quiero recordarte</p>
+    </a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav text-uppercase ml-auto">
+        <li class="nav-item md:pl-4"><a class="nav-link js-scroll-trigger" href="#planes">Membresias</a></li>
+        <li class="nav-item md:pl-4"><a class="nav-link js-scroll-trigger" href="#quienes-somos">Sobre Nosotros</a></li>
+        <li class="nav-item md:pl-4"><a class="nav-link js-scroll-trigger" href="#faq">Preguntas frecuentes </a></li>
+        <li class="nav-item md:pl-4"><a class="nav-link js-scroll-trigger" href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    </div>
+  </nav>
 <section class="my-0 py-0">
   <div 
     class="w-full h-[60vh] bg-cover bg-center bg-top bg-no-repeat" 
