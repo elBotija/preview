@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de QR con Logo</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <style>
+      body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #f0f4f8;
+          color: #333;
+      }
+      h1 {
+          color: #2c3e50;
+          text-align: center;
+          margin-bottom: 30px;
+      }
+      form {
+          background-color: #ffffff;
+          padding: 30px;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          margin-bottom: 30px;
+      }
+      label {
+          display: block;
+          margin-top: 15px;
+          font-weight: bold;
+          color: #34495e;
+      }
+      input[type="text"], input[type="url"] {
+          width: 100%;
+          padding: 10px;
+          margin-top: 5px;
+          border: 1px solid #bdc3c7;
+          border-radius: 4px;
+          font-size: 16px;
+          transition: border-color 0.3s ease;
+      }
+      input[type="text"]:focus, input[type="url"]:focus {
+          outline: none;
+          border-color: #3498db;
+          box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+      }
+      button {
+          display: block;
+          width: 100%;
+          margin-top: 20px;
+          padding: 12px;
+          background-color: #3498db;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          font-size: 18px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+      }
+      button:hover {
+          background-color: #2980b9;
+      }
+      #qr-container {
+          text-align: center;
+          margin-top: 30px;
+          background-color: #ffffff;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      #qr-container canvas {
+          max-width: 100%;
+          height: auto;
+      }
+      #qr-container p {
+          margin-top: 15px;
+          word-break: break-all;
+          color: #7f8c8d;
+      }
+  </style>
+</head>
+<body>
+  <h1>Generador de Código QR con Logo y Parámetros UTM Personalizados</h1>
+    
+  <form id="utm-form">
+      <label for="base-url">URL Base:</label>
+      <input type="url" id="base-url" required placeholder="https://misitio.com">
+      
+      <label for="utm-source">UTM Source:</label>
+      <input type="text" id="utm-source" required placeholder="qr_code">
+      
+      <label for="utm-medium">UTM Medium:</label>
+      <input type="text" id="utm-medium" required placeholder="offline">
+      
+      <label for="utm-campaign">UTM Campaign:</label>
+      <input type="text" id="utm-campaign" required placeholder="promocion_verano">
+      
+      <label for="utm-term">UTM Term (opcional):</label>
+      <input type="text" id="utm-term" placeholder="producto_x">
+      
+      <label for="utm-content">UTM Content (opcional):</label>
+      <input type="text" id="utm-content" placeholder="flyer_a">
+      
+      <button type="submit">Generar QR</button>
+  </form>
+    <div id="qr-container"></div>
+
+    <script>
+        function generateRandomString(length) {
+            let result = '';
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+            const charactersLength = characters.length;
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+
+        function addLogoToQR(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            const logo = new Image();
+            logo.src = './logo.png'; // Reemplaza esto con la URL de tu logo
+            logo.onload = function() {
+                // Calcula la posición para centrar el logo
+                const logoSize = canvas.width * 0.3; // El logo ocupará el 20% del ancho del QR
+                const logoX = (canvas.width - logoSize) / 2;
+                const logoY = (canvas.height - logoSize) / 2;
+                
+                // Dibuja un fondo blanco para el logo
+                ctx.fillStyle = 'white';
+                ctx.fillRect(logoX, logoY, logoSize, logoSize);
+                
+                // Dibuja el logo
+                ctx.drawImage(logo, logoX, logoY, logoSize, logoSize);
+            };
+        }
+
+
+        function generateQRCode(url, elementId) {
+            QRCode.toCanvas(document.getElementById(elementId), url, {
+                errorCorrectionLevel: 'H', // Alta tolerancia a la pérdida de datos
+                width: 256,
+                margin: 1,
+            }, function (error) {
+                if (error) console.error(error);
+                console.log('QR generado para:', url);
+                addLogoToQR(elementId)
+            });
+        }
+
+        function generateQRCodes() {
+            const container = document.getElementById('qrs-container');
+            const timestamp = Date.now();
+            
+            for (let i = 0; i < 10; i++) {
+                const randomString = `${generateRandomString(3)}-${generateRandomString(3)}`;
+                const url = `https://misitio.com/${randomString}-${timestamp}`;
+                
+                const wrapper = document.createElement('div')
+                wrapper.className = 'qr-container'
+                
+                const canvasId = `qr-${i}`;
+                const canvas = document.createElement('canvas');
+                canvas.id = canvasId;
+                wrapper.appendChild(canvas)
+                
+                const label = document.createElement('div')
+                label.className = 'qr-label'
+                label.innerHTML = `${randomString}-${timestamp}`
+                wrapper.appendChild(label)
+
+                container.appendChild(wrapper);
+                generateQRCode(url, canvasId);
+            }
+        }
+
+        document.getElementById('utm-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const baseUrl = document.getElementById('base-url').value;
+            const utmParams = new URLSearchParams({
+                utm_source: document.getElementById('utm-source').value,
+                utm_medium: document.getElementById('utm-medium').value,
+                utm_campaign: document.getElementById('utm-campaign').value
+            });
+
+            const utmTerm = document.getElementById('utm-term').value;
+            if (utmTerm) utmParams.append('utm_term', utmTerm);
+
+            const utmContent = document.getElementById('utm-content').value;
+            if (utmContent) utmParams.append('utm_content', utmContent);
+
+            const finalUrl = `${baseUrl}?${utmParams.toString()}`;
+
+            const container = document.getElementById('qr-container');
+            container.innerHTML = ''; // Limpiar contenido previo
+
+            const canvas = document.createElement('canvas');
+            canvas.id = 'qr-code';
+            container.appendChild(canvas);
+
+            const urlDisplay = document.createElement('p');
+            urlDisplay.textContent = finalUrl;
+            container.appendChild(urlDisplay);
+
+            generateQRCode(finalUrl, 'qr-code');
+        });
+
+        // window.onload = generateQRCodes;
+    </script>
+</body>
+</html>
