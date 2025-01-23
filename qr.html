@@ -10,9 +10,20 @@
             display: inline-block;
             margin: 10px;
             text-align: center;
+            position:relative;
         }
         .qr-code {
             margin-bottom: 5px;
+        }
+        .qr-logo {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 30%;
+            height: auto;
+            background: white;
+            padding: 5px;
         }
     </style>
 </head>
@@ -32,23 +43,11 @@
         }
 
         function addLogoToQR(canvasId) {
-            const canvas = document.getElementById(canvasId);
-            const ctx = canvas.getContext('2d');
-            const logo = new Image();
-            logo.src = './logo.png'; // Reemplaza esto con la URL de tu logo
-            logo.onload = function() {
-                // Calcula la posición para centrar el logo
-                const logoSize = canvas.width * 0.3; // El logo ocupará el 20% del ancho del QR
-                const logoX = (canvas.width - logoSize) / 2;
-                const logoY = (canvas.height - logoSize) / 2;
-                
-                // Dibuja un fondo blanco para el logo
-                ctx.fillStyle = 'white';
-                ctx.fillRect(logoX, logoY, logoSize, logoSize);
-                
-                // Dibuja el logo
-                ctx.drawImage(logo, logoX, logoY, logoSize, logoSize);
-            };
+            const wrapper = document.getElementById(canvasId).parentElement;
+            const logo = document.createElement('img');
+            logo.src = './logo-imp2.png';
+            logo.className = 'qr-logo';
+            wrapper.appendChild(logo);
         }
 
 
