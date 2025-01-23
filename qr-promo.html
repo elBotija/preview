@@ -63,13 +63,20 @@
           background-color: #2980b9;
       }
       #qr-container {
-          text-align: center;
-          margin-top: 30px;
-          background-color: #ffffff;
-          padding: 20px;
-          border-radius: 8px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position:relative;
+        text-align: center;
+        margin-top: 30px;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
+      .qr-container {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+            position:relative;
+        }
       #qr-container canvas {
           max-width: 100%;
           height: auto;
@@ -79,6 +86,16 @@
           word-break: break-all;
           color: #7f8c8d;
       }
+      .qr-logo {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 30%;
+            height: auto;
+            background: white;
+            padding: 5px;
+        }
   </style>
 </head>
 <body>
@@ -86,22 +103,22 @@
     
   <form id="utm-form">
       <label for="base-url">URL Base:</label>
-      <input type="url" id="base-url" required placeholder="https://misitio.com">
+      <input type="url" id="base-url" required value="https://www.quierorecordarte.com.ar" placeholder="https://www.quierorecordarte.com.ar">
       
-      <label for="utm-source">UTM Source:</label>
+      <!-- <label for="utm-source">UTM Source:</label>
       <input type="text" id="utm-source" required placeholder="qr_code">
       
       <label for="utm-medium">UTM Medium:</label>
-      <input type="text" id="utm-medium" required placeholder="offline">
+      <input type="text" id="utm-medium" required placeholder="offline"> -->
       
       <label for="utm-campaign">UTM Campaign:</label>
       <input type="text" id="utm-campaign" required placeholder="promocion_verano">
       
-      <label for="utm-term">UTM Term (opcional):</label>
+      <!-- <label for="utm-term">UTM Term (opcional):</label>
       <input type="text" id="utm-term" placeholder="producto_x">
       
       <label for="utm-content">UTM Content (opcional):</label>
-      <input type="text" id="utm-content" placeholder="flyer_a">
+      <input type="text" id="utm-content" placeholder="flyer_a"> -->
       
       <button type="submit">Generar QR</button>
   </form>
@@ -119,23 +136,11 @@
         }
 
         function addLogoToQR(canvasId) {
-            const canvas = document.getElementById(canvasId);
-            const ctx = canvas.getContext('2d');
-            const logo = new Image();
-            logo.src = './logo.png'; // Reemplaza esto con la URL de tu logo
-            logo.onload = function() {
-                // Calcula la posición para centrar el logo
-                const logoSize = canvas.width * 0.3; // El logo ocupará el 20% del ancho del QR
-                const logoX = (canvas.width - logoSize) / 2;
-                const logoY = (canvas.height - logoSize) / 2;
-                
-                // Dibuja un fondo blanco para el logo
-                ctx.fillStyle = 'white';
-                ctx.fillRect(logoX, logoY, logoSize, logoSize);
-                
-                // Dibuja el logo
-                ctx.drawImage(logo, logoX, logoY, logoSize, logoSize);
-            };
+            const wrapper = document.getElementById(canvasId).parentElement;
+            const logo = document.createElement('img');
+            logo.src = './logo-imp2.png';
+            logo.className = 'qr-logo';
+            wrapper.appendChild(logo);
         }
 
 
@@ -157,7 +162,7 @@
             
             for (let i = 0; i < 10; i++) {
                 const randomString = `${generateRandomString(3)}-${generateRandomString(3)}`;
-                const url = `https://misitio.com/${randomString}-${timestamp}`;
+                const url = `https://www.quierorecordarte.com.ar/${randomString}-${timestamp}`;
                 
                 const wrapper = document.createElement('div')
                 wrapper.className = 'qr-container'
@@ -182,25 +187,29 @@
             
             const baseUrl = document.getElementById('base-url').value;
             const utmParams = new URLSearchParams({
-                utm_source: document.getElementById('utm-source').value,
-                utm_medium: document.getElementById('utm-medium').value,
+                // utm_source: document.getElementById('utm-source').value,
+                // utm_medium: document.getElementById('utm-medium').value,
                 utm_campaign: document.getElementById('utm-campaign').value
             });
 
-            const utmTerm = document.getElementById('utm-term').value;
-            if (utmTerm) utmParams.append('utm_term', utmTerm);
+            // const utmTerm = document.getElementById('utm-term').value;
+            // if (utmTerm) utmParams.append('utm_term', utmTerm);
 
-            const utmContent = document.getElementById('utm-content').value;
-            if (utmContent) utmParams.append('utm_content', utmContent);
+            // const utmContent = document.getElementById('utm-content').value;
+            // if (utmContent) utmParams.append('utm_content', utmContent);
 
             const finalUrl = `${baseUrl}?${utmParams.toString()}`;
 
             const container = document.getElementById('qr-container');
             container.innerHTML = ''; // Limpiar contenido previo
 
+            const wrapper = document.createElement('div')
+            wrapper.className = 'qr-container'
+
             const canvas = document.createElement('canvas');
             canvas.id = 'qr-code';
-            container.appendChild(canvas);
+            wrapper.appendChild(canvas);
+            container.appendChild(wrapper);
 
             const urlDisplay = document.createElement('p');
             urlDisplay.textContent = finalUrl;
