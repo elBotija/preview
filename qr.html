@@ -68,8 +68,8 @@
             const timestamp = Date.now();
             
             for (let i = 0; i < 10; i++) {
-                const randomString = `${generateRandomString(3)}-${generateRandomString(3)}`;
-                const url = `https://misitio.com/${randomString}-${timestamp}`;
+                const randomString = `${generateRandomString(3)}-${generateRandomString(4)}-${generateRandomString(3)}`;
+                const url = `https://app.quierorecordarte.com.ar/memorial/${randomString}`;
                 
                 const wrapper = document.createElement('div')
                 wrapper.className = 'qr-container'
@@ -81,7 +81,7 @@
                 
                 const label = document.createElement('div')
                 label.className = 'qr-label'
-                label.innerHTML = `${randomString}-${timestamp}`
+                label.innerHTML = `${randomString}`
                 wrapper.appendChild(label)
 
                 container.appendChild(wrapper);
