@@ -6,9 +6,18 @@
     <title>Generador de QR con Logo</title>
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
     <style>
-        .qr-container {
+        body {
+            background-color: #00524b;
+        }
+        .qr-container-wrapper {
             display: inline-block;
             margin: 10px;
+            text-align: center;
+            position:relative;
+        }
+        .qr-container {
+            display: inline-block;
+            margin: 10px 10px 0px 10px;
             text-align: center;
             position:relative;
         }
@@ -25,10 +34,60 @@
             background: white;
             padding: 5px;
         }
+        .qr-label {
+            color: white;
+            font-size: 1.5em;
+        }
+        @font-face {
+            font-family: 'Winter Beauty';
+            src: url('./assets/css/webfonts/winterbeauty-Script.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        .qr-footer {
+            color: white;
+            padding-top: .4rem;
+            font-size: 2.2rem;
+            font-family: 'Winter Beauty', sans-serif !important;
+        }
+        @page {
+            margin: 0;
+            background-color: #00524b;
+        }
+        
+        @media print {
+            html, body {
+                background-color: #00524b !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                margin: 0;
+                padding: 20px;
+            }
+            #qrs-container {
+                background-color: #00524b !important;
+            }
+            .qr-container-wrapper {
+                background-color: #00524b !important;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            .qr-container {
+                background-color: #00524b !important;
+            }
+            .qr-label, .qr-footer {
+                color: white !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            h1 {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Generador de Códigos QR</h1>
+    <h1 style="color:white">Generador de Códigos QR</h1>
     <div id="qrs-container"></div>
 
     <script>
@@ -71,6 +130,8 @@
                 const randomString = `${generateRandomString(3)}-${generateRandomString(4)}-${generateRandomString(3)}`;
                 const url = `https://app.quierorecordarte.com.ar/memorial/${randomString}`;
                 
+                const pWrapper = document.createElement('div')
+                pWrapper.className = 'qr-container-wrapper'
                 const wrapper = document.createElement('div')
                 wrapper.className = 'qr-container'
                 
@@ -78,13 +139,19 @@
                 const canvas = document.createElement('canvas');
                 canvas.id = canvasId;
                 wrapper.appendChild(canvas)
-                
+                pWrapper.appendChild(wrapper)
+                const footer = document.createElement('div')
+                footer.className = 'qr-footer'
+                footer.innerHTML = `Quiero recorderte`
+                pWrapper.appendChild(footer)
+
                 const label = document.createElement('div')
                 label.className = 'qr-label'
                 label.innerHTML = `${randomString}`
-                wrapper.appendChild(label)
+                pWrapper.appendChild(label)
 
-                container.appendChild(wrapper);
+
+                container.appendChild(pWrapper);
                 generateQRCode(url, canvasId);
             }
         }
