@@ -12,6 +12,59 @@
             margin: 0;
             padding: 10px;
             min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .controls {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        select, input, button {
+            padding: 8px 12px;
+            border: 2px solid white;
+            border-radius: 4px;
+            background: transparent;
+            color: white;
+            font-size: 16px;
+        }
+
+        select {
+            min-width: 200px;
+        }
+
+        input[type="number"] {
+            width: 80px;
+        }
+
+        button {
+            background-color: white;
+            color: #00524b;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e0e0e0;
+        }
+
+        label {
+            color: white;
+            font-size: 16px;
         }
 
         #qrs-container {
@@ -80,7 +133,7 @@
             font-family: 'Winter Beauty', sans-serif !important;
         }
 
-        /* Estilos específicos para impresión */
+        /* Estilos para impresión */
         @page {
             size: A4;
             margin: 0;
@@ -88,6 +141,10 @@
         }
         
         @media print {
+            .controls {
+                display: none;
+            }
+
             html, body {
                 background-color: #00524b !important;
                 -webkit-print-color-adjust: exact !important;
@@ -136,7 +193,6 @@
                 display: none;
             }
 
-            /* Forzar salto de página cada 6 QRs */
             .qr-container-wrapper:nth-child(6) {
                 page-break-after: always;
                 break-after: page;
@@ -145,7 +201,25 @@
     </style>
 </head>
 <body>
-    <h1 style="color:white">Generador de Códigos QR</h1>
+    <div class="controls">
+        <div class="control-group">
+            <label for="footerText">Texto:</label>
+            <select id="footerText">
+                <option value="Recordandote">Recordandote</option>
+                <option value="Acompañandote">Acompañandote</option>
+                <option value="Siempre juntos">Siempre juntos</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label for="qrCount">Cantidad:</label>
+            <input type="number" id="qrCount" value="12" min="1" max="100">
+        </div>
+        <div class="control-group">
+            <button onclick="generateQRCodes()">Generar QRs</button>
+            <button onclick="window.print()">Guardar PDF</button>
+        </div>
+    </div>
+
     <div id="qrs-container"></div>
 
     <script>
@@ -181,8 +255,13 @@
 
         function generateQRCodes() {
             const container = document.getElementById('qrs-container');
+            const footerText = document.getElementById('footerText').value;
+            const qrCount = parseInt(document.getElementById('qrCount').value) || 12;
             
-            for (let i = 0; i < 10; i++) {
+            // Limpiar contenedor existente
+            container.innerHTML = '';
+            
+            for (let i = 0; i < qrCount; i++) {
                 const randomString = `${generateRandomString(3)}-${generateRandomString(4)}-${generateRandomString(3)}`;
                 const url = `https://app.quierorecordarte.com.ar/memorial/${randomString}`;
                 
@@ -198,7 +277,7 @@
                 pWrapper.appendChild(wrapper)
                 const footer = document.createElement('div')
                 footer.className = 'qr-footer'
-                footer.innerHTML = `Quiero recorderte`
+                footer.innerHTML = footerText;
                 pWrapper.appendChild(footer)
 
                 const label = document.createElement('div')
@@ -211,6 +290,7 @@
             }
         }
 
+        // Generar QRs iniciales
         window.onload = generateQRCodes;
     </script>
 </body>
