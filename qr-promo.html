@@ -3,90 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de QR con Logo</title>
+    <title>Generador de QR Promocional</title>
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
     <style>
-      body {
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          max-width: 800px;
-          margin: 0 auto;
-          padding: 20px;
-          background-color: #f0f4f8;
-          color: #333;
-      }
-      h1 {
-          color: #2c3e50;
-          text-align: center;
-          margin-bottom: 30px;
-      }
-      form {
-          background-color: #ffffff;
-          padding: 30px;
-          border-radius: 8px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          margin-bottom: 30px;
-      }
-      label {
-          display: block;
-          margin-top: 15px;
-          font-weight: bold;
-          color: #34495e;
-      }
-      input[type="text"], input[type="url"] {
-          width: 100%;
-          padding: 10px;
-          margin-top: 5px;
-          border: 1px solid #bdc3c7;
-          border-radius: 4px;
-          font-size: 16px;
-          transition: border-color 0.3s ease;
-      }
-      input[type="text"]:focus, input[type="url"]:focus {
-          outline: none;
-          border-color: #3498db;
-          box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-      }
-      button {
-          display: block;
-          width: 100%;
-          margin-top: 20px;
-          padding: 12px;
-          background-color: #3498db;
-          color: white;
-          border: none;
-          border-radius: 4px;
-          font-size: 18px;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-      }
-      button:hover {
-          background-color: #2980b9;
-      }
-      #qr-container {
-        position:relative;
-        text-align: center;
-        margin-top: 30px;
-        background-color: #ffffff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-      .qr-container {
-            display: inline-block;
-            margin: 10px;
-            text-align: center;
-            position:relative;
+        body {
+            background-color: #00524b;
+            margin: 0;
+            padding: 10px;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
         }
-      #qr-container canvas {
-          max-width: 100%;
-          height: auto;
-      }
-      #qr-container p {
-          margin-top: 15px;
-          word-break: break-all;
-          color: #7f8c8d;
-      }
-      .qr-logo {
+
+        .controls {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        select, input, button {
+            padding: 8px 12px;
+            border: 2px solid white;
+            border-radius: 4px;
+            background: transparent;
+            color: white;
+            font-size: 16px;
+        }
+
+        input[type="url"], input[type="text"] {
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        input[type="number"] {
+            width: 80px;
+        }
+
+        button {
+            background-color: white;
+            color: #00524b;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e0e0e0;
+        }
+
+        label {
+            color: white;
+            font-size: 16px;
+        }
+
+        #qrs-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 5px;
+        }
+
+        .qr-container-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #00524b;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .qr-container {
+            text-align: center;
+            position: relative;
+            background-color: #00524b;
+            padding: 20px 20px 0 20px;
+            margin-bottom: 2px;
+        }
+
+        canvas {
+            background: white;
+            border-radius: 5px;
+            padding: 5px;
+            box-sizing: content-box;
+        }
+
+        .qr-logo {
             position: absolute;
             left: 50%;
             top: 50%;
@@ -96,43 +111,112 @@
             background: white;
             padding: 5px;
         }
-  </style>
+        @font-face {
+            font-family: 'Winter Beauty';
+            src: url('./assets/css/webfonts/winterbeauty-Script.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .qr-footer {
+            color: white;
+            padding-top: .2rem;
+            font-size: 1.8rem;
+            font-family: 'Winter Beauty', sans-serif;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+            background-color: #00524b;
+        }
+        
+        @media print {
+            .controls {
+                display: none;
+            }
+
+            html, body {
+                background-color: #00524b !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                width: 210mm;
+                height: 297mm;
+                margin: 0;
+                padding: 5px;
+            }
+
+            #qrs-container {
+                background-color: #00524b !important;
+                grid-template-rows: repeat(3, 1fr);
+                height: calc(100% - 10px);
+                gap: 10px;
+                padding: 5px;
+            }
+
+            .qr-container-wrapper {
+                background-color: #00524b !important;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                height: auto;
+            }
+
+            .qr-container {
+                background-color: #00524b !important;
+                padding: 20px 20px 0 20px;
+            }
+
+            canvas {
+                background: white !important;
+                padding: 5px !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .qr-footer {
+                color: white !important;
+            }
+
+            .qr-container-wrapper:nth-child(6) {
+                page-break-after: always;
+                break-after: page;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Generador de Código QR con Logo y Parámetros UTM Personalizados</h1>
-    
-  <form id="utm-form">
-      <label for="base-url">URL Base:</label>
-      <input type="url" id="base-url" required value="https://www.quierorecordarte.com.ar" placeholder="https://www.quierorecordarte.com.ar">
-      
-      <!-- <label for="utm-source">UTM Source:</label>
-      <input type="text" id="utm-source" required placeholder="qr_code">
-      
-      <label for="utm-medium">UTM Medium:</label>
-      <input type="text" id="utm-medium" required placeholder="offline"> -->
-      
-      <label for="utm-campaign">UTM Campaign:</label>
-      <input type="text" id="utm-campaign" required placeholder="promocion_verano">
-      
-      <!-- <label for="utm-term">UTM Term (opcional):</label>
-      <input type="text" id="utm-term" placeholder="producto_x">
-      
-      <label for="utm-content">UTM Content (opcional):</label>
-      <input type="text" id="utm-content" placeholder="flyer_a"> -->
-      
-      <button type="submit">Generar QR</button>
-  </form>
-    <div id="qr-container"></div>
+    <div class="controls">
+        <div class="control-group">
+            <label for="base-url">URL Base:</label>
+            <input type="url" id="base-url" value="https://www.quierorecordarte.com.ar" required>
+        </div>
+        <div class="control-group">
+            <label for="utm-campaign">Campaña:</label>
+            <input type="text" id="utm-campaign" placeholder="promocion_verano" required>
+        </div>
+        <div class="control-group">
+            <label for="qrCount">Cantidad:</label>
+            <input type="number" id="qrCount" value="12" min="1" max="100">
+        </div>
+        <div class="control-group">
+            <button onclick="generateQRCodes()">Generar QRs</button>
+            <button onclick="window.print()">Guardar PDF</button>
+        </div>
+    </div>
+
+    <div id="qrs-container"></div>
 
     <script>
-        function generateRandomString(length) {
-            let result = '';
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-            const charactersLength = characters.length;
-            for (let i = 0; i < length; i++) {
-                result += characters.charAt(Math.floor(Math.random() * charactersLength));
-            }
-            return result;
+        function generateQRCode(url, elementId) {
+            QRCode.toCanvas(document.getElementById(elementId), url, {
+                errorCorrectionLevel: 'H',
+                width: 256,
+                margin: 1,
+            }, function (error) {
+                if (error) console.error(error);
+                addLogoToQR(elementId);
+            });
         }
 
         function addLogoToQR(canvasId) {
@@ -143,82 +227,46 @@
             wrapper.appendChild(logo);
         }
 
-
-        function generateQRCode(url, elementId) {
-            QRCode.toCanvas(document.getElementById(elementId), url, {
-                errorCorrectionLevel: 'H', // Alta tolerancia a la pérdida de datos
-                width: 256,
-                margin: 1,
-            }, function (error) {
-                if (error) console.error(error);
-                console.log('QR generado para:', url);
-                addLogoToQR(elementId)
-            });
-        }
-
         function generateQRCodes() {
             const container = document.getElementById('qrs-container');
-            const timestamp = Date.now();
+            const baseUrl = document.getElementById('base-url').value;
+            const campaign = document.getElementById('utm-campaign').value;
+            const qrCount = parseInt(document.getElementById('qrCount').value) || 12;
             
-            for (let i = 0; i < 10; i++) {
-                const randomString = `${generateRandomString(3)}-${generateRandomString(3)}`;
-                const url = `https://www.quierorecordarte.com.ar/${randomString}-${timestamp}`;
+            // Limpiar contenedor existente
+            container.innerHTML = '';
+            
+            for (let i = 0; i < qrCount; i++) {
+                const utmParams = new URLSearchParams({
+                    utm_campaign: campaign,
+                    utm_source: 'qr_promocional',
+                    utm_medium: 'offline'
+                });
+
+                const finalUrl = `${baseUrl}?${utmParams.toString()}`;
                 
-                const wrapper = document.createElement('div')
-                wrapper.className = 'qr-container'
+                const pWrapper = document.createElement('div');
+                pWrapper.className = 'qr-container-wrapper';
+                
+                const wrapper = document.createElement('div');
+                wrapper.className = 'qr-container';
                 
                 const canvasId = `qr-${i}`;
                 const canvas = document.createElement('canvas');
                 canvas.id = canvasId;
-                wrapper.appendChild(canvas)
                 
-                const label = document.createElement('div')
-                label.className = 'qr-label'
-                label.innerHTML = `${randomString}-${timestamp}`
-                wrapper.appendChild(label)
+                wrapper.appendChild(canvas);
+                pWrapper.appendChild(wrapper);
+                
+                const footer = document.createElement('div');
+                footer.className = 'qr-footer';
+                footer.innerHTML = "Quiero recordarte";
+                pWrapper.appendChild(footer);
 
-                container.appendChild(wrapper);
-                generateQRCode(url, canvasId);
+                container.appendChild(pWrapper);
+                generateQRCode(finalUrl, canvasId);
             }
         }
-
-        document.getElementById('utm-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const baseUrl = document.getElementById('base-url').value;
-            const utmParams = new URLSearchParams({
-                // utm_source: document.getElementById('utm-source').value,
-                // utm_medium: document.getElementById('utm-medium').value,
-                utm_campaign: document.getElementById('utm-campaign').value
-            });
-
-            // const utmTerm = document.getElementById('utm-term').value;
-            // if (utmTerm) utmParams.append('utm_term', utmTerm);
-
-            // const utmContent = document.getElementById('utm-content').value;
-            // if (utmContent) utmParams.append('utm_content', utmContent);
-
-            const finalUrl = `${baseUrl}?${utmParams.toString()}`;
-
-            const container = document.getElementById('qr-container');
-            container.innerHTML = ''; // Limpiar contenido previo
-
-            const wrapper = document.createElement('div')
-            wrapper.className = 'qr-container'
-
-            const canvas = document.createElement('canvas');
-            canvas.id = 'qr-code';
-            wrapper.appendChild(canvas);
-            container.appendChild(wrapper);
-
-            const urlDisplay = document.createElement('p');
-            urlDisplay.textContent = finalUrl;
-            container.appendChild(urlDisplay);
-
-            generateQRCode(finalUrl, 'qr-code');
-        });
-
-        // window.onload = generateQRCodes;
     </script>
 </body>
 </html>
