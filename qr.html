@@ -6,24 +6,41 @@
     <title>Generador de QR con Logo</title>
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
     <style>
+        /* Estilos generales */
         body {
             background-color: #00524b;
+            margin: 0;
+            padding: 10px;
+            min-height: 100vh;
         }
+
+        #qrs-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px;
+            width: 100%;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 5px;
+        }
+
         .qr-container-wrapper {
-            display: inline-block;
-            margin: 10px;
-            text-align: center;
-            position:relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #00524b;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            padding: 5px 0;
         }
+
         .qr-container {
-            display: inline-block;
-            margin: 10px 10px 0px 10px;
             text-align: center;
-            position:relative;
+            position: relative;
+            background-color: #00524b;
+            margin-bottom: 2px;
         }
-        .qr-code {
-            margin-bottom: 5px;
-        }
+
         .qr-logo {
             position: absolute;
             left: 50%;
@@ -34,23 +51,30 @@
             background: white;
             padding: 5px;
         }
+
         .qr-label {
             color: white;
             font-size: 1.5em;
+            margin-top: 2px;
         }
+
         @font-face {
             font-family: 'Winter Beauty';
             src: url('./assets/css/webfonts/winterbeauty-Script.woff2') format('woff2');
             font-weight: normal;
             font-style: normal;
         }
+
         .qr-footer {
             color: white;
-            padding-top: .4rem;
+            padding-top: .2rem;
             font-size: 2.2rem;
             font-family: 'Winter Beauty', sans-serif !important;
         }
+
+        /* Estilos específicos para impresión */
         @page {
+            size: A4;
             margin: 0;
             background-color: #00524b;
         }
@@ -61,27 +85,43 @@
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 color-adjust: exact !important;
+                width: 210mm;
+                height: 297mm;
                 margin: 0;
-                padding: 20px;
+                padding: 5px;
             }
+
             #qrs-container {
                 background-color: #00524b !important;
+                grid-template-rows: repeat(3, 1fr);
+                height: calc(100% - 10px);
+                gap: 2px;
+                padding: 5px;
             }
+
             .qr-container-wrapper {
                 background-color: #00524b !important;
                 page-break-inside: avoid;
                 break-inside: avoid;
+                height: auto;
             }
+
             .qr-container {
                 background-color: #00524b !important;
             }
+
             .qr-label, .qr-footer {
                 color: white !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
             }
+
             h1 {
                 display: none;
+            }
+
+            /* Forzar salto de página cada 6 QRs */
+            .qr-container-wrapper:nth-child(6) {
+                page-break-after: always;
+                break-after: page;
             }
         }
     </style>
@@ -109,10 +149,9 @@
             wrapper.appendChild(logo);
         }
 
-
         function generateQRCode(url, elementId) {
             QRCode.toCanvas(document.getElementById(elementId), url, {
-                errorCorrectionLevel: 'H', // Alta tolerancia a la pérdida de datos
+                errorCorrectionLevel: 'H',
                 width: 256,
                 margin: 1,
             }, function (error) {
@@ -124,7 +163,6 @@
 
         function generateQRCodes() {
             const container = document.getElementById('qrs-container');
-            const timestamp = Date.now();
             
             for (let i = 0; i < 10; i++) {
                 const randomString = `${generateRandomString(3)}-${generateRandomString(4)}-${generateRandomString(3)}`;
@@ -149,7 +187,6 @@
                 label.className = 'qr-label'
                 label.innerHTML = `${randomString}`
                 pWrapper.appendChild(label)
-
 
                 container.appendChild(pWrapper);
                 generateQRCode(url, canvasId);
