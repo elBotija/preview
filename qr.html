@@ -17,7 +17,7 @@
         #qrs-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 5px;
+            gap: 10px;
             width: 100%;
             max-width: 210mm;
             margin: 0 auto;
@@ -31,14 +31,22 @@
             background-color: #00524b;
             page-break-inside: avoid;
             break-inside: avoid;
-            padding: 5px 0;
+            /* padding: 20px; */
         }
 
         .qr-container {
             text-align: center;
             position: relative;
             background-color: #00524b;
+            padding: 20px 20px 0 20px;
             margin-bottom: 2px;
+        }
+
+        canvas {
+            background: white;
+            border-radius: 5px;
+            padding: 5px;
+            box-sizing: content-box;
         }
 
         .qr-logo {
@@ -95,7 +103,7 @@
                 background-color: #00524b !important;
                 grid-template-rows: repeat(3, 1fr);
                 height: calc(100% - 10px);
-                gap: 2px;
+                gap: 10px;
                 padding: 5px;
             }
 
@@ -108,12 +116,22 @@
 
             .qr-container {
                 background-color: #00524b !important;
+                padding: 20px 20px 0 20px;
+            }
+
+            canvas {
+                background: white !important;
+                padding: 5px !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
 
             .qr-label, .qr-footer {
                 color: white !important;
             }
-
+            .qr-label{
+                display: none;
+            }    
             h1 {
                 display: none;
             }
