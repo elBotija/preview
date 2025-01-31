@@ -203,8 +203,8 @@
 <body>
     <div class="controls">
         <div class="control-group">
-            <label for="footerText">Texto:</label>
-            <select id="footerText">
+            <label for="membresia">Membresia:</label>
+            <select id="membresia">
                 <option value="Recordandote">Recordandote</option>
                 <option value="Acompañandote">Acompañandote</option>
                 <option value="Siempre juntos">Siempre juntos</option>
@@ -255,7 +255,7 @@
 
         function generateQRCodes() {
             const container = document.getElementById('qrs-container');
-            const footerText = document.getElementById('footerText').value;
+            const footerText = "Quiero recordarte";
             const qrCount = parseInt(document.getElementById('qrCount').value) || 12;
             
             // Limpiar contenedor existente
@@ -290,8 +290,8 @@
             }
         }
 
-        // Generar QRs iniciales
-        window.onload = generateQRCodes;
+        // // Generar QRs iniciales
+        // window.onload = generateQRCodes;
     </script>
 </body>
 </html>
