@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de QR Individual</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body {
+            background-color: #00524b;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .controls {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex: 1;
+        }
+
+        input, button {
+            padding: 8px 12px;
+            border: 2px solid white;
+            border-radius: 4px;
+            background: transparent;
+            color: white;
+            font-size: 16px;
+        }
+
+        input {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        button {
+            background-color: white;
+            color: #00524b;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        button:hover {
+            background-color: #e0e0e0;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        label {
+            color: white;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+
+        .qr-container-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #00524b;
+            padding: 20px;
+        }
+
+        .qr-container {
+            text-align: center;
+            position: relative;
+            background-color: #00524b;
+            padding: 20px;
+        }
+
+        #qrCode {
+            background: white;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .qr-logo {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 30%;
+            height: auto;
+            background: white;
+            padding: 5px;
+        }
+
+        .qr-label {
+            color: white;
+            font-size: 1.5em;
+            margin-top: 10px;
+        }
+
+        @font-face {
+            font-family: 'Winter Beauty';
+            src: url('./assets/css/webfonts/winterbeauty-Script.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .qr-footer {
+            color: white;
+            padding-top: .2rem;
+            font-size: 2.2rem;
+            font-family: 'Winter Beauty', sans-serif !important;
+        }
+
+        @media print {
+            .controls {
+                display: none;
+            }
+
+            body {
+                padding: 0;
+            }
+
+            .qr-label {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <div class="control-group">
+            <label for="codigo">Código:</label>
+            <input type="text" id="codigo" placeholder="Formato: XXX-XXXX-XXX">
+        </div>
+        <div class="control-group" style="flex: 0">
+            <button id="generateButton" onclick="generateQR()" disabled>Generar QR</button>
+            <button onclick="window.print()">Guardar PDF</button>
+        </div>
+    </div>
+
+    <div class="qr-container-wrapper">
+        <div class="qr-container">
+            <div id="qrCode"></div>
+        </div>
+        <div class="qr-footer">Quiero recordarte</div>
+        <div id="qrLabel" class="qr-label"></div>
+    </div>
+
+    <script>
+        function addLogo() {
+            const container = document.querySelector('.qr-container');
+            const existingLogo = container.querySelector('.qr-logo');
+            if (!existingLogo) {
+                const logo = document.createElement('img');
+                logo.src = './logo-imp2.png';
+                logo.className = 'qr-logo';
+                container.appendChild(logo);
+            }
+        }
+
+        function generateQR() {
+            const codigo = document.getElementById('codigo').value.trim();
+            const qrLabel = document.getElementById('qrLabel');
+            
+            // Validar formato del código
+            const formatoValido = /^[A-Za-z0-9]{3}-[A-Za-z0-9]{4}-[A-Za-z0-9]{3}$/.test(codigo);
+            
+            if (!formatoValido) {
+                alert('Por favor, ingrese un código válido en el formato XXX-XXXX-XXX');
+                return;
+            }
+
+            const url = `https://app.quierorecordarte.com.ar/memorial/${codigo}`;
+            
+            // Limpiar QR anterior
+            document.getElementById('qrCode').innerHTML = '';
+            
+            // Generar nuevo QR
+            new QRCode(document.getElementById('qrCode'), {
+                text: url,
+                width: 256,
+                height: 256,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            // Actualizar etiqueta
+            qrLabel.textContent = codigo;
+            
+            // Agregar logo después de un pequeño delay para asegurar que el QR ya se generó
+            setTimeout(addLogo, 100);
+        }
+
+        // Agregar validación en tiempo real del formato
+        document.getElementById('codigo').addEventListener('input', function(e) {
+            let valor = e.target.value;
+            
+            // Eliminar caracteres no permitidos (solo permite letras, números y guiones)
+            valor = valor.replace(/[^A-Za-z0-9-]/g, '');
+            
+            // Aplicar formato automáticamente
+            if (valor.length > 0) {
+                // Manejar los guiones automáticamente
+                if (valor.length > 3 && valor.charAt(3) !== '-') {
+                    valor = valor.slice(0, 3) + '-' + valor.slice(3);
+                }
+                if (valor.length > 8 && valor.charAt(8) !== '-') {
+                    valor = valor.slice(0, 8) + '-' + valor.slice(8);
+                }
+                // Limitar la longitud total
+                valor = valor.slice(0, 12);
+            }
+            
+            e.target.value = valor;
+
+            // Habilitar/deshabilitar el botón según si el formato es válido
+            const formatoValido = /^[A-Za-z0-9]{3}-[A-Za-z0-9]{4}-[A-Za-z0-9]{3}$/.test(valor);
+            document.getElementById('generateButton').disabled = !formatoValido;
+        });
+    </script>
+</body>
+</html>
