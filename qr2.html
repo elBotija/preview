@@ -236,10 +236,7 @@
             <label for="qrCount">Cantidad:</label>
             <input type="number" id="qrCount" value="16" min="1" max="100">
         </div>
-        <div class="control-group">
-            <label for="footerText">Texto inferior:</label>
-            <input type="text" id="footerText" value="Quiero recordarte" style="width: 200px;">
-        </div>
+
         <div class="control-group">
             <button id="generateBtn">Generar QRs</button>
             <button id="printBtn">Guardar PDF</button>
@@ -329,7 +326,7 @@
                 printArea.innerHTML = '';
                 
                 const membresia = membresiaSelect.value;
-                const footerText = footerTextInput.value;
+                const footerText = "Quiero recordarte";
                 const totalQRs = parseInt(qrCountInput.value);
                 
                 if (isNaN(totalQRs) || totalQRs < 1) {
