@@ -680,7 +680,7 @@ header.masthead .intro-text {
   -webkit-mask: url("../img/colibri.svg") no-repeat;
   mask-size: contain;
   -webkit-mask-size: contain;
-  background-color: #1f3f45;
+  background-color: #00524b;
   position: absolute;
   top: -3px;
   right: 0;
@@ -755,7 +755,7 @@ html,body{
   -webkit-mask: url("../img/colibri.svg") no-repeat;
   mask-size: contain;
   -webkit-mask-size: contain;
-  background-color: #1f3f45;
+  background-color: #00524b;
   position: absolute;
   top: -3px;
   right: 0;
