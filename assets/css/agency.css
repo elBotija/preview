@@ -538,15 +538,15 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
   font-family: 'Winter Beauty', sans-serif !important;
 }
 .navbar-brand{
-  color: #103233 !important;
+  color: #00524b !important;
 }
 
 .nav-link {
-  color: #103233 !important;
+  color: #00524b !important;
 }
 
 .navbar-shrink .nav-link, .navbar-shrink .navbar-brand {
-  color: #103233 !important;
+  color: #00524b !important;
 }
 
 
@@ -627,7 +627,7 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
   -webkit-mask: url("../img/logo.svg") no-repeat;
   mask-size: contain;
   -webkit-mask-size: contain;
-  background-color: #103233;
+  background-color: #00524b;
 }
 .bg-mask-center {
   mask-position: center;
@@ -635,7 +635,7 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 }
 
 .navbar-shrink .logo-icon {
-  background-color: #103233 !important;
+  background-color: #00524b !important;
 }
 
 .intro-heading .logo-icon {
