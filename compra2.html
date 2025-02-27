@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <meta name="description" content="Adquiere tu membresía - Quiero Recordarte">
+  <meta name="author" content="Quiero Recordarte">
+  
+  <title>Adquirir Membresía - Quiero recordarte</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/all.min.css" rel="stylesheet" type="text/css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet'>
+  
+  <!-- Custom styles -->
+  <link href="assets/css/agency.css" rel="stylesheet">
+  
+  <style>
+    .collapse.navbar-collapse {
+      visibility: inherit;
+    }
+    /* Estilos base mantenidos del sitio */
+    /* .qr-font { font-family: 'Kaushan Script', cursive; } */
+    .add-colibri::after { content: " 🪶"; font-size: 0.8em; }
+    
+    /* Nuevos estilos para el checkout mejorado */
+    .checkout-container {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    @media (max-width: 768px) {
+      .checkout-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .progress-bar {
+      display: flex;
+      margin-bottom: 2rem;
+      position: relative;
+      justify-content: space-between;
+    }
+    
+    .progress-step {
+      flex: 1;
+      text-align: center;
+      position: relative;
+      padding: 1rem;
+    }
+    
+    .progress-step::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background: #e2e8f0;
+      z-index: -1;
+    }
+    
+    .progress-step.active::after {
+      background: #00524b;
+    }
+    
+    .progress-step:last-child::after {
+      display: none;
+    }
+    
+    .step-indicator {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.5rem;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s ease;
+    }
+    
+    .progress-step.active .step-indicator {
+      background: #00524b;
+      border-color: #00524b;
+      color: white;
+    }
+    
+    .estimated-time {
+      font-size: 0.875rem;
+      color: #666;
+      margin-top: 0.25rem;
+    }
+    
+    .input-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .input-group input,
+    .input-group select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.375rem;
+      transition: border-color 0.15s ease;
+    }
+    
+    .input-group input:focus,
+    .input-group select:focus {
+      outline: none;
+      border-color: #00524b;
+      box-shadow: 0 0 0 3px rgba(0, 82, 75, 0.1);
+    }
+    
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+    .tooltip-text {
+      visibility: hidden;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+      white-space: nowrap;
+    }
+    
+    .benefits-section {
+      background: #f8fafc;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .benefits-list {
+      display: grid;
+      gap: 1rem;
+    }
+    
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .benefit-icon {
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #e1e5cd;
+      border-radius: 50%;
+      color: #00524b;
+    }
+    
+    .error-message {
+      color: #dc2626;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .order-summary {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      position: sticky;
+      top: 2rem;
+    }
+    
+    @media (max-width: 768px) {
+      .order-summary {
+        position: static;
+        margin-top: 2rem;
+      }
+      
+      input[type="tel"],
+      input[type="email"],
+      input[type="number"] {
+        font-size: 16px !important;
+      }
+    }
+    
+    .confirmation-section {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .confirmation-icon {
+      width: 4rem;
+      height: 4rem;
+      background: #00524b;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+      color: white;
+      font-size: 2rem;
+    }
+    
+    /* Animaciones */
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-slide-in {
+      animation: slideIn 0.5s ease forwards;
+    }
+    .progress-step::after {
+  /* Cambiar de #e2e8f0 a #E1E5CD o similar */
+  background: #E1E5CD; 
+}
+
+.progress-step.active::after {
+  /* Mantener el verde de tu marca */
+  background: #00524b;
+}
+.progress-step.active {
+  /* Mantener el verde de tu marca */
+  background: #E1E5CD;
+}
+.step-title{
+  /* Mantener el verde de tu marca */
+  color: #00524b;
+}
+.progress-bar{ background-color: inherit;}
+.progress-step:not(.active) .step-indicator {
+  color: #00524b;
+}
+/* Y para el fondo general de la sección */
+.main-content {
+  /* Cambiar de azul a un color que combine con tu paleta */
+  border:1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  background-color: white; /* o usar blanco */
+}
+  </style>
+</head>
+
+<body class="bg-gray-50">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top " id="mainNav">
+    <div class=" container ">
+    <a class="navbar-brand js-scroll-trigger qr-font flex items-center" href="#page-top"> 
+      <span class="logo-icon"></span> 
+      <p class="pl-4 mb-0 !leading-6 md:!leading-7">Quiero <br>recordarte</p>
+    </a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav text-uppercase ml-auto">
+        <li class="nav-item md:pl-4"><a class="nav-link js-scroll-trigger" href="#planes">Membresias</a></li>
+        <li class="nav-item md:pl-4"><a class="nav-link js-scroll-trigger" href="#quienes-somos">Sobre Nosotros</a></li>
+        <li class="nav-item md:pl-4"><a class="nav-link js-scroll-trigger" href="#faq">Preguntas frecuentes </a></li>
+        <li class="nav-item md:pl-4"><a class="nav-link js-scroll-trigger" href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    </div>
+  </nav>
+
+  <div class="container mt-32">
+    <!-- Checkout Container -->
+    <div class="checkout-container">
+      <!-- Main Checkout Form -->
+      <div class="main-content">
+        <!-- Progress Bar -->
+        <div class="progress-bar mb-8">
+          <div class="progress-step active" data-step="1">
+            <div class="step-indicator">1</div>
+            <div class="step-title">Datos Personales</div>
+            <div class="estimated-time">~2 min</div>
+          </div>
+          <div class="progress-step" data-step="2">
+            <div class="step-indicator">2</div>
+            <div class="step-title">Revisión</div>
+            <div class="estimated-time">~1 min</div>
+          </div>
+          <div class="progress-step" data-step="3">
+            <div class="step-indicator">3</div>
+            <div class="step-title">Pago</div>
+            <div class="estimated-time">~2 min</div>
+          </div>
+        </div>
+
+        <!-- Benefits Section -->
+        <div class="benefits-section mb-8">
+          <h3 class="text-xl font-semibold mb-4">Beneficios de tu membresía</h3>
+          <div class="benefits-list">
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold">Garantía de Satisfacción</h4>
+                <p class="text-sm text-gray-600">30 días de garantía en nuestros productos</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fas fa-truck"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold">Envío Gratuito</h4>
+                <p class="text-sm text-gray-600">A todo el país sin costo adicional</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fas fa-headset"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold">Soporte Dedicado</h4>
+                <p class="text-sm text-gray-600">Asistencia personalizada en todo momento</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Steps -->
+        <form id="checkoutForm" class="space-y-6">
+          <!-- Step 1: Personal Information -->
+          <div id="step1" class="animate-slide-in">
+            <div class="mb-6">
+              <label class="flex items-center space-x-2 mb-4">
+                <input type="checkbox" id="isGift" class="form-checkbox text-[#00524b]">
+                <span>Esta membresía es un regalo</span>
+                <div class="tooltip">
+                  <i class="fas fa-info-circle text-gray-400"></i>
+                  <span class="tooltip-text">
+                    Podrás ingresar los datos del destinatario
+                  </span>
+                </div>
+              </label>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="input-group">
+                <label for="firstName">Nombre*</label>
+                <input 
+                  type="text" 
+                  id="firstName" 
+                  class="form-input"
+                  required
+                  data-validate="name"
+                >
+                <div class="error-message hidden">
+                  <i class="fas fa-exclamation-circle"></i>
+                  <span>Por favor ingresa tu nombre</span>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label for="lastName">Apellido*</label>
+                <input 
+                  type="text" 
+                  id="lastName" 
+                  class="form-input"
+                  required
+                  data-validate="name"
+                >
+              </div>
+
+              <div class="input-group">
+                <label for="email">Email*</label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  class="form-input"
+                  required
+                  data-validate="email"
+                >
+              </div>
+
+              <div class="input-group">
+                <label for="phone">Teléfono*</label>
+                <input 
+                  type="tel" 
+                  id="phone" 
+                  class="form-input"
+                  required
+                  data-validate="phone"
+                  pattern="[0-9]{10}"
+                >
+              </div>
+
+              <div class="input-group md:col-span-2">
+                <label for="address">Dirección de envío*</label>
+                <input 
+                  type="text" 
+                  id="address" 
+                  class="form-input"
+                  required
+                >
+              </div>
+
+              <div class="input-group">
+                <label for="city">Ciudad*</label>
+                <input 
+                  type="text" 
+                  id="city" 
+                  class="form-input"
+                  required
+                >
+              </div>
+
+              <div class="input-group">
+                <label for="province">Provincia*</label>
+                <select 
+                  id="province" 
+                  class="form-select"
+                  required
+                >
+                  <option value="">Seleccionar...</option>
+                  <option value="buenos_aires">Buenos Aires</option>
+                  <option value="capital_federal">Capital Federal</option>
+                  <option value="catamarca">Catamarca</option>
+                  <option value="chaco">Chaco</option>
+                  <!-- Agregar resto de provincias -->
+                </select>
+              </div>
+
+              <div class="input-group">
+                <label for="postalCode">Código Postal*</label>
+                <input 
+                  type="text" 
+                  id="postalCode" 
+                  class="form-input"
+                  required
+                  pattern="[0-9]{4}"
+                >
+              </div>
+            </div>
+
+            <!-- Gift Information (Hidden by default) -->
+            <div id="giftInfo" class="hidden mt-8 pt-8 border-t">
+              <h3 class="text-xl font-semibold mb-4">Información del Destinatario</h3>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="input-group">
+                  <label for="giftFirstName">Nombre del Destinatario*</label>
+                  <input 
+                    type="text" 
+                    id="giftFirstName" 
+                    class="form-input"
+                  >
+                </div>
+
+                <div class="input-group">
+                  <label for="giftLastName">Apellido del Destinatario*</label>
+                  <input 
+                    type="text" 
+                    id="giftLastName" 
+                    class="form-input"
+                  >
+                </div>
+
+                <div class="input-group">
+                  <label for="giftEmail">Email del Destinatario*</label>
+                  <input 
+                    type="email" 
+                    id="giftEmail" 
+                    class="form-input"
+                  >
+                </div>
+
+                <div class="input-group">
+                  <label for="giftPhone">Teléfono del Destinatario</label>
+                  <input 
+                    type="tel" 
+                    id="giftPhone" 
+                    class="form-input"
+                  >
+                </div>
+
+                <div class="input-group md:col-span-2">
+                  <label for="giftMessage">Mensaje personalizado (opcional)</label>
+                  <textarea 
+                    id="giftMessage" 
+                    class="form-textarea"
+                    rows="3"
+                    placeholder="Escribe un mensaje para el destinatario..."
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-end mt-8">
+              <button type="button" class="bg-[#00524b] text-white px-6 py-3 rounded font-semibold hover:bg-[#003d38] transition-colors next-step">
+                Continuar al Resumen
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Review -->
+          <div id="step2" class="hidden animate-slide-in">
+            <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+              <h3 class="text-xl font-semibold mb-4">Resumen de la Orden</h3>
+              
+              <div id="orderDetails" class="space-y-4">
+                <!-- Membership Details -->
+                <div class="flex items-start justify-between pb-4 border-b">
+                  <div>
+                    <h4 class="font-semibold qr-font text-[#00524b]" id="membershipName">Membresía</h4>
+                    <ul class="text-sm text-gray-600 mt-2 space-y-1" id="membershipFeatures">
+                      <!-- Features will be populated dynamically -->
+                    </ul>
+                  </div>
+                  <div class="text-right">
+                    <p class="font-bold text-lg" id="membershipPrice">$0</p>
+                  </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="pb-4 border-b">
+                  <h4 class="font-semibold mb-2">Información de Contacto</h4>
+                  <div id="contactSummary" class="text-sm text-gray-600">
+                    <!-- Will be populated dynamically -->
+                  </div>
+                </div>
+
+                <!-- Shipping Information -->
+                <div class="pb-4 border-b">
+                  <h4 class="font-semibold mb-2">Dirección de Envío</h4>
+                  <div id="shippingSummary" class="text-sm text-gray-600">
+                    <!-- Will be populated dynamically -->
+                  </div>
+                </div>
+
+                <!-- Gift Information (if applicable) -->
+                <div id="giftSummary" class="pb-4 border-b hidden">
+                  <h4 class="font-semibold mb-2">Información del Regalo</h4>
+                  <div id="giftDetailsSummary" class="text-sm text-gray-600">
+                    <!-- Will be populated dynamically -->
+                  </div>
+                </div>
+
+                <!-- Totals -->
+                <div class="pt-4">
+                  <div class="flex justify-between mb-2">
+                    <span>Subtotal:</span>
+                    <span id="subtotalAmount" class="font-semibold">$0</span>
+                  </div>
+                  <div class="flex justify-between mb-2">
+                    <span>Envío:</span>
+                    <span class="text-[#00524b]">Gratis</span>
+                  </div>
+                  <div class="flex justify-between text-xl font-bold">
+                    <span>Total:</span>
+                    <span id="totalAmount">$0</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Terms and Conditions -->
+            <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+              <h3 class="text-xl font-semibold mb-4">Términos y Condiciones</h3>
+              <div class="mb-4">
+                <label class="flex items-start space-x-2">
+                  <input type="checkbox" id="termsAccepted" class="mt-1 form-checkbox text-[#00524b]" required>
+                  <span class="text-sm">
+                    He leído y acepto los <a href="#" class="text-[#00524b] underline">términos y condiciones</a> y la 
+                    <a href="#" class="text-[#00524b] underline">política de privacidad</a>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <div class="flex justify-between mt-8">
+              <button type="button" class="bg-gray-200 text-gray-700 px-6 py-3 rounded font-semibold hover:bg-gray-300 transition-colors previous-step">
+                Volver
+              </button>
+              <button type="button" class="bg-[#00524b] text-white px-6 py-3 rounded font-semibold hover:bg-[#003d38] transition-colors next-step">
+                Proceder al Pago
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Payment -->
+          <div id="step3" class="hidden animate-slide-in">
+            <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+              <h3 class="text-xl font-semibold mb-4">Método de Pago</h3>
+              
+              <div class="space-y-4">
+                <div class="p-4 bg-yellow-50 rounded-lg">
+                  <p class="text-sm text-yellow-800">
+                    <i class="fas fa-info-circle mr-2"></i>
+                    Serás redirigido a Mercado Pago para completar tu compra de forma segura.
+                  </p>
+                </div>
+
+                <div class="border rounded-lg p-4">
+                  <label class="flex items-center space-x-3">
+                    <input type="radio" name="paymentMethod" value="mercadopago" checked class="form-radio text-[#00524b]">
+                    <div>
+                      <span class="font-semibold">Mercado Pago</span>
+                      <p class="text-sm text-gray-600 mt-1">
+                        Paga con tarjeta de crédito, débito o en efectivo
+                      </p>
+                    </div>
+                    <img src="https://www.mercadopago.com/org-img/Manual/ManualCheckout/imgs/selo_mp_checkout_2x.png" alt="Mercado Pago" class="h-8 ml-auto">
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-between mt-8">
+              <button type="button" class="bg-gray-200 text-gray-700 px-6 py-3 rounded font-semibold hover:bg-gray-300 transition-colors previous-step">
+                Volver
+              </button>
+              <button type="submit" class="bg-[#00524b] text-white px-8 py-3 rounded font-semibold hover:bg-[#003d38] transition-colors">
+                Finalizar Compra
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Order Summary Sidebar -->
+      <div class="order-summary-sidebar">
+        <div class="order-summary">
+          <h3 class="text-xl font-semibold mb-4">Tu Membresía</h3>
+          
+          <div class="mb-6 pb-6 border-b">
+            <h4 class="qr-font text-[#00524b] text-xl" id="sidebarMembershipName">
+              <!-- Will be populated dynamically -->
+            </h4>
+            <p class="text-2xl font-bold mt-2" id="sidebarMembershipPrice">$0</p>
+            <ul class="text-sm text-gray-600 mt-4 space-y-2" id="sidebarMembershipFeatures">
+              <!-- Will be populated dynamically -->
+            </ul>
+          </div>
+
+          <!-- Testimonial -->
+          <div class="mb-6 pb-6 border-b">
+            <div class="flex items-center mb-2">
+              <div class="flex text-yellow-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <span class="ml-2 text-sm text-gray-600">5.0</span>
+            </div>
+            <p class="text-sm text-gray-600 italic">
+              "Un servicio excepcional. La placa quedó hermosa y el memorial digital es perfecto para mantener vivos los recuerdos de mi ser querido."
+            </p>
+            <p class="text-sm font-semibold mt-2">María G.</p>
+          </div>
+
+          <!-- Need Help? -->
+          <div>
+            <h4 class="font-semibold mb-2">¿Necesitas ayuda?</h4>
+            <p class="text-sm text-gray-600 mb-4">
+              Nuestro equipo está disponible para asistirte en todo el proceso.
+            </p>
+            <div class="flex items-center gap-4">
+              <a href="tel:+123456789" class="flex items-center text-sm text-[#00524b]">
+                <i class="fas fa-phone mr-2"></i>
+                Llamar
+              </a>
+              <a href="#" class="flex items-center text-sm text-[#00524b]">
+                <i class="fas fa-comment mr-2"></i>
+                Chat
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+      <div class="text-center">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-check text-green-500 text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">¡Compra Exitosa!</h3>
+        <p class="text-gray-600 mb-6">
+          Gracias por tu compra. Te hemos enviado un correo con los detalles de tu pedido.
+        </p>
+        <div class="space-y-3">
+          <a href="index.html" class="block w-full bg-[#00524b] text-white px-4 py-2 rounded font-semibold hover:bg-[#003d38] transition-colors">
+            Volver al Inicio
+          </a>
+          <button type="button" class="block w-full bg-gray-200 text-gray-700 px-4 py-2 rounded font-semibold hover:bg-gray-300 transition-colors" onclick="window.print()">
+            Imprimir Comprobante
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/agency.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      // Get membership type from URL parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const membershipType = urlParams.get('membership');
+      console.log(membershipType)
+      // Membership data
+      const memberships = {
+        'acompanandote': {
+          name: 'Acompañandote',
+          price: 120000,
+          features: [
+            'Placa en vinilo',
+            'Uso en interiores',
+            'Foto de perfil y portada',
+            'Biografía (hasta 2.000 caracteres)',
+            'Hasta 5 fotos',
+            '1 audio o video de hasta 15 seg'
+          ]
+        },
+        'recordandote': {
+          name: 'Recordandote',
+          price: 150000,
+          features: [
+            'Placa en PVC alto impacto',
+            'Apto exteriores',
+            'Foto de perfil y portada',
+            'Biografía (hasta 5.000 caracteres)',
+            'Hasta 10 fotos',
+            '3 audios o videos de hasta 15 seg',
+            'Relato auditivo de la biografía'
+          ]
+        },
+        'siempre': {
+          name: 'Siempre Juntos',
+          price: 180000,
+          features: [
+            'Placa metálica',
+            'Apto exteriores',
+            'Foto de perfil y portada',
+            'Biografía (hasta 10.000 caracteres)',
+            'Hasta 20 fotos',
+            '5 audios o videos de hasta 15 seg',
+            'Relato auditivo con música',
+            'Recordatorio de fechas importantes'
+          ]
+        }
+      };
+
+      // Initialize membership data if available
+      if (membershipType && memberships[membershipType]) {
+        const membership = memberships[membershipType];
+        updateMembershipDisplay(membership);
+      }
+
+      // Real-time form validation
+      $('input[data-validate]').on('input', function() {
+        validateField($(this));
+      });
+
+      // Phone number formatting
+      $('#phone').on('input', function() {
+        let value = $(this).val().replace(/\D/g, '');
+        if (value.length > 10) value = value.slice(0, 10);
+        $(this).val(value);
+      });
+
+      // Postal code formatting
+      $('#postalCode').on('input', function() {
+        let value = $(this).val().replace(/\D/g, '');
+        if (value.length > 4) value = value.slice(0, 4);
+        $(this).val(value);
+      });
+
+      // Gift checkbox toggle
+      $('#isGift').on('change', function() {
+        if ($(this).is(':checked')) {
+          $('#giftInfo').removeClass('hidden').addClass('animate-slide-in');
+          // Add required attribute to gift fields
+          $('#giftFirstName, #giftLastName, #giftEmail').attr('required', true);
+        } else {
+          $('#giftInfo').addClass('hidden');
+          // Remove required attribute from gift fields
+          $('#giftFirstName, #giftLastName, #giftEmail').attr('required', false);
+        }
+      });
+
+      // Step navigation
+      let currentStep = 1;
+      const totalSteps = 3;
+
+      // Next step button
+      $('.next-step').click(function() {
+        if (validateStep(currentStep)) {
+          if (currentStep === 1) {
+            updateOrderSummary();
+          }
+          
+          // Hide current step
+          $(`#step${currentStep}`).addClass('hidden');
+          
+          // Increment step counter
+          currentStep++;
+          
+          // Show next step
+          $(`#step${currentStep}`).removeClass('hidden');
+          
+          // Update progress indicator
+          updateProgressBar();
+          
+          // Scroll to top
+          window.scrollTo(0, 0);
+        }
+      });
+
+      // Previous step button
+      $('.previous-step').click(function() {
+        if (currentStep > 1) {
+          // Hide current step
+          $(`#step${currentStep}`).addClass('hidden');
+          
+          // Decrement step counter
+          currentStep--;
+          
+          // Show previous step
+          $(`#step${currentStep}`).removeClass('hidden');
+          
+          // Update progress indicator
+          updateProgressBar();
+          
+          // Scroll to top
+          window.scrollTo(0, 0);
+        }
+      });
+
+      // Form submission
+      $('#checkoutForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        if (validateStep(currentStep)) {
+          // Show success modal (in real implementation, would redirect to payment gateway)
+          $('#successModal').removeClass('hidden');
+        }
+      });
+
+      // Step validation
+      function validateStep(step) {
+        switch (step) {
+          case 1:
+            return validatePersonalInfo();
+          case 2:
+            return $('#termsAccepted').is(':checked');
+          default:
+            return true;
+        }
+      }
+      
+      // Validate personal information fields
+      function validatePersonalInfo() {
+        let isValid = true;
+        
+        // Required fields validation
+        $('#step1 input[required], #step1 select[required]').each(function() {
+          if (!$(this).val()) {
+            markInvalid($(this), 'Este campo es obligatorio');
+            isValid = false;
+          } else {
+            markValid($(this));
+          }
+        });
+        
+        // Email validation
+        const emailField = $('#email');
+        if (emailField.val() && !isValidEmail(emailField.val())) {
+          markInvalid(emailField, 'Por favor ingresa un email válido');
+          isValid = false;
+        }
+        
+        // Phone validation
+        const phoneField = $('#phone');
+        if (phoneField.val() && phoneField.val().length < 10) {
+          markInvalid(phoneField, 'El teléfono debe tener 10 dígitos');
+          isValid = false;
+        }
+        
+        // Gift validation if checkbox is checked
+        if ($('#isGift').is(':checked')) {
+          $('#giftFirstName, #giftLastName, #giftEmail').each(function() {
+            if (!$(this).val()) {
+              markInvalid($(this), 'Este campo es obligatorio');
+              isValid = false;
+            } else if ($(this).attr('id') === 'giftEmail' && !isValidEmail($(this).val())) {
+              markInvalid($(this), 'Por favor ingresa un email válido');
+              isValid = false;
+            } else {
+              markValid($(this));
+            }
+          });
+        }
+        
+        return isValid;
+      }
+      
+      // Field validation helper
+      function validateField(field) {
+        const value = field.val();
+        const type = field.data('validate');
+        
+        if (!value) {
+          markInvalid(field, 'Este campo es obligatorio');
+          return false;
+        }
+        
+        switch (type) {
+          case 'email':
+            if (!isValidEmail(value)) {
+              markInvalid(field, 'Por favor ingresa un email válido');
+              return false;
+            }
+            break;
+          case 'phone':
+            if (value.length < 10) {
+              markInvalid(field, 'El teléfono debe tener 10 dígitos');
+              return false;
+            }
+            break;
+        }
+        
+        markValid(field);
+        return true;
+      }
+      
+      // Email validation helper
+      function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      }
+      
+      // Mark field as invalid
+      function markInvalid(field, message) {
+        field.addClass('border-red-500').removeClass('border-green-500');
+        
+        // Get error message element or create it
+        let errorElement = field.next('.error-message');
+        if (!errorElement.length) {
+          errorElement = $('<div class="error-message"><i class="fas fa-exclamation-circle"></i><span></span></div>');
+          field.after(errorElement);
+        }
+        
+        // Update error message
+        errorElement.find('span').text(message);
+        errorElement.removeClass('hidden');
+      }
+      
+      // Mark field as valid
+      function markValid(field) {
+        field.removeClass('border-red-500').addClass('border-green-500');
+        
+        // Hide error message if exists
+        const errorElement = field.next('.error-message');
+        if (errorElement.length) {
+          errorElement.addClass('hidden');
+        }
+      }
+      
+      // Update progress bar
+      function updateProgressBar() {
+        $('.progress-step').removeClass('active');
+        $(`.progress-step[data-step="${currentStep}"]`).addClass('active');
+        
+        // Update progress line
+        for (let i = 1; i <= totalSteps; i++) {
+          const step = $(`.progress-step[data-step="${i}"]`);
+          if (i < currentStep) {
+            step.addClass('completed');
+          } else {
+            step.removeClass('completed');
+          }
+        }
+      }
+      
+      // Update membership display
+      function updateMembershipDisplay(membership) {
+        // Update sidebar display
+        $('#sidebarMembershipName').text(membership.name);
+        $('#sidebarMembershipPrice').text(` $ ${formatNumber(membership.price)}`);
+        
+        const featuresList = $('#sidebarMembershipFeatures');
+        featuresList.empty();
+        
+        membership.features.forEach(feature => {
+          featuresList.append(`<li><i class="fas fa-check text-[#00524b] mr-2"></i>${feature}</li>`);
+        });
+      }
+      
+      // Update order summary for review step
+      function updateOrderSummary() {
+        const selectedMembership = memberships[membershipType] || memberships['acompanandote'];
+        
+        // Update membership details
+        $('#membershipName').text(selectedMembership.name);
+        $('#membershipPrice').text(` $ ${formatNumber(selectedMembership.price)}`);
+        
+        const featuresList = $('#membershipFeatures');
+        featuresList.empty();
+        
+        selectedMembership.features.forEach(feature => {
+          featuresList.append(`<li><i class="fas fa-check text-[#00524b] mr-1"></i>${feature}</li>`);
+        });
+        
+        // Update contact information
+        $('#contactSummary').html(`
+          <p>${$('#firstName').val()} ${$('#lastName').val()}</p>
+          <p>${$('#email').val()}</p>
+          <p>${$('#phone').val()}</p>
+        `);
+        
+        // Update shipping information
+        $('#shippingSummary').html(`
+          <p>${$('#address').val()}</p>
+          <p>${$('#city').val()}, ${$('#province').val()}, CP ${$('#postalCode').val()}</p>
+        `);
+        
+        // Update gift information if applicable
+        if ($('#isGift').is(':checked')) {
+          $('#giftSummary').removeClass('hidden');
+          $('#giftDetailsSummary').html(`
+            <p>Para: ${$('#giftFirstName').val()} ${$('#giftLastName').val()}</p>
+            <p>Email: ${$('#giftEmail').val()}</p>
+            ${$('#giftPhone').val() ? `<p>Teléfono: ${$('#giftPhone').val()}</p>` : ''}
+            ${$('#giftMessage').val() ? `<p>Mensaje: "${$('#giftMessage').val()}"</p>` : ''}
+          `);
+        } else {
+          $('#giftSummary').addClass('hidden');
+        }
+        
+        // Update totals
+        $('#subtotalAmount').text(` $ ${formatNumber(selectedMembership.price)}`);
+        $('#totalAmount').text(` $ ${formatNumber(selectedMembership.price)}`);
+        
+        // Update payment step total
+        $('#finalPaymentAmount').text(` $ ${formatNumber(selectedMembership.price)}`);
+      }
+      
+      // Format number with thousands separator
+      function formatNumber(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      }
+    });
+  </script>
+</body>
+</html>
