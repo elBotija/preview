@@ -277,6 +277,159 @@
   padding: 1.5rem;
   background-color: white; /* o usar blanco */
 }
+/* Estilos base mejorados */
+@media (max-width: 768px) {
+  .checkout-container {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .order-summary-sidebar {
+    margin-top: 1.5rem;
+  }
+  
+  .progress-bar {
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 1rem;
+  }
+  
+  .progress-step {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+  }
+  
+  .progress-step::after {
+    display: none; /* Eliminar líneas de conexión en móvil */
+  }
+  
+  .step-indicator {
+    width: 30px;
+    height: 30px;
+    font-size: 0.875rem;
+  }
+  
+  .step-title {
+    font-size: 0.875rem;
+  }
+  
+  .estimated-time {
+    font-size: 0.75rem;
+  }
+  
+  .container.mt-32 {
+    margin-top: 6rem !important; /* Ajuste para evitar que el navbar tape el contenido */
+  }
+  
+  .main-content {
+    padding: 1rem;
+  }
+  
+  .benefits-section {
+    padding: 1rem;
+  }
+  
+  .benefit-item {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .input-group {
+    margin-bottom: 1rem;
+  }
+  
+  /* Mejoras para el formulario en dispositivos móviles */
+  .grid.grid-cols-1.md\:grid-cols-2 {
+    display: block;
+  }
+  
+  /* Hacer que los botones sean más grandes en móvil para mejor usabilidad */
+  button.next-step,
+  button.previous-step,
+  button[type="submit"] {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+  
+  .flex.justify-between.mt-8 {
+    flex-direction: column;
+  }
+  
+  /* Mejorar visualización de la orden */
+  .order-summary {
+    padding: 1rem;
+  }
+  
+  /* Formulario más amigable para móviles */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select,
+  textarea {
+    font-size: 16px !important; /* Evita el zoom en iOS */
+    padding: 0.75rem !important;
+  }
+  
+  /* Ajustes para modals */
+  #successModal .bg-white {
+    max-width: 90%;
+  }
+}
+
+/* Ajustes para dispositivos muy pequeños */
+@media (max-width: 480px) {
+  .container.mt-32 {
+    margin-top: 5rem !important;
+  }
+  
+  h3.text-xl {
+    font-size: 1.1rem;
+  }
+  
+  .benefit-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0.75rem;
+  }
+  
+  .benefits-list {
+    gap: 0.75rem;
+  }
+  
+  .navbar-brand p {
+    font-size: 0.9rem;
+  }
+  
+  #navbarResponsive {
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 1rem;
+  }
+}
+
+/* Mejoras para la navegación en modo móvil */
+@media (max-width: 991px) {
+  #mainNav {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+  }
+  
+  .navbar-toggler {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .navbar-nav .nav-item {
+    margin: 0.25rem 0;
+  }
+  
+  .navbar-nav .nav-link {
+    padding: 0.5rem 0;
+  }
+}
   </style>
 </head>
 
@@ -304,7 +457,6 @@
     </div>
     </div>
   </nav>
-
   <div class="container mt-32">
     <!-- Checkout Container -->
     <div class="checkout-container">
@@ -901,10 +1053,11 @@
       $('#checkoutForm').on('submit', function(e) {
         e.preventDefault();
         
-        if (validateStep(currentStep)) {
-          // Show success modal (in real implementation, would redirect to payment gateway)
-          $('#successModal').removeClass('hidden');
-        }
+        createPaymentPreference();
+        // if (validateStep(currentStep)) {
+        //   // Show success modal (in real implementation, would redirect to payment gateway)
+        //   $('#successModal').removeClass('hidden');
+        // }
       });
 
       // Step validation
@@ -1110,7 +1263,52 @@
       function formatNumber(num) {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
       }
+      async function createPaymentPreference() {
+        const formData = {
+              membershipType: memberships[membershipType].name,
+              firstName: $('#firstName').val(),
+              lastName: $('#lastName').val(),
+              email: $('#email').val(),
+              phone: $('#phone').val(),
+              address: $('#address').val(),
+              city: $('#city').val(),
+              province: $('#province').val(),
+              postalCode: $('#postalCode').val()
+            };
+        try {
+          const response = await fetch(`http://localhost:3000/api/v1/create-preference`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+          });
+  
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Error al crear la preferencia de pago');
+          }
+          const res = await response.json();
+          window.location.href = res.init_point;
+        } catch (error) {
+          console.error('Error:', error);
+          throw error;
+        }
+      }
     });
+
+
+    // // test pyment link
+    // setTimeout(() => {
+    //   createPaymentPreference(formData)
+    //     .then(data => {
+    //       console.log('Payment preference created:', data);
+    //       // window.location.href = data.init_point;
+    //     })
+    //     .catch(error => {
+    //       console.error('Error creating payment preference:', error);
+    //     });
+    // }, 3000);
   </script>
 </body>
 </html>
