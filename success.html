@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Pago Exitoso - Quiero Recordarte</title>
+  
+  <!-- Bootstrap core CSS -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="assets/css/all.min.css" rel="stylesheet" type="text/css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+  
+  <!-- Custom styles for this theme -->
+  <link href="assets/css/agency.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <style>
+    .collapse.navbar-collapse {
+      visibility: inherit;
+    }
+    @media print {
+      .navbar, .footer, .wp-icon {display: none;}
+    }
+  </style>
+</head>
+
+<body id="page-top" class="bg-gray-100 min-h-screen">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top " id="mainNav">
+    <div class=" container ">
+    <a class="navbar-brand js-scroll-trigger qr-font flex items-center" href="index.html"> 
+      <span class="logo-icon"></span> 
+      <p class="pl-4 mb-0 !leading-6 md:!leading-7">Quiero <br>recordarte</p>
+    </a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+      aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav text-uppercase ml-auto">
+        <li class="nav-item md:pl-4"><a class="nav-link" href="index.html#planes">Membresias</a></li>
+        <li class="nav-item md:pl-4"><a class="nav-link" href="index.html#quienes-somos">Sobre Nosotros</a></li>
+        <li class="nav-item md:pl-4"><a class="nav-link" href="index.html#faq">Preguntas frecuentes</a></li>
+        <li class="nav-item md:pl-4"><a class="nav-link" href="index.html#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    </div>
+  </nav>
+  <!-- End Navigation -->
+
+  <!-- Content -->
+  <div class="container mx-auto px-4 py-28 mt-16">
+    <div class="max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+      <div class="p-8 text-center">
+        <div class="mx-auto w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        
+        <h1 class="text-2xl font-bold text-gray-800 mb-2">¡Pago Exitoso!</h1>
+        <p class="text-gray-600 mb-6">Tu pago ha sido procesado correctamente. ¡Gracias por tu compra!</p>
+        
+        <div id="payment-details" class="mb-8 text-left bg-gray-50 p-4 rounded-lg">
+          <p class="text-sm text-gray-600 mb-2"><strong>ID de Orden:</strong> <span id="order-id"></span></p>
+          <p class="text-sm text-gray-600 mb-2"><strong>Estado:</strong> <span id="order-status"></span></p>
+          <p class="text-sm text-gray-600 mb-2"><strong>Membresía:</strong> <span id="membership-type"></span></p>
+          <p class="text-sm text-gray-600"><strong>Fecha:</strong> <span id="order-date"></span></p>
+        </div>
+        
+        <div class="space-y-3">
+          <a href="/" class="block w-full bg-[#00524b] text-white px-4 py-2 rounded font-semibold hover:bg-[#003d38] transition-colors">
+            Volver al Inicio
+          </a>
+          <button type="button" class="block w-full bg-gray-200 text-gray-700 px-4 py-2 rounded font-semibold hover:bg-gray-300 transition-colors" onclick="window.print()">
+            Imprimir Comprobante
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading indicator -->
+  <div id="loading-indicator" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" style="display: none;">
+    <div class="bg-white p-5 rounded-lg">
+      <svg class="animate-spin h-10 w-10 text-[#00524b] mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+      <p class="mt-2 text-center">Cargando información del pago...</p>
+    </div>
+  </div>
+
+  <!-- Error message -->
+  <div id="error-message" class="fixed bottom-4 right-4 bg-red-500 text-white p-4 rounded-lg shadow-lg" style="display: none;"></div>
+
+  <!-- Footer -->
+  <footer class="footer bg-[#b8c4ba]">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-4">
+          <span class="copyright">Copyright &copy; Quiero recordarte 2024</span>
+        </div>
+        <!-- Social Media -->
+        <div class="col-md-4">
+          <ul class="list-inline social-buttons">
+            <li class="list-inline-item">
+              <a href="https://www.facebook.com/quierorecordarteqr" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://www.instagram.com/quierorecordarteqr/" target="_blank">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Legal -->
+        <div class="col-md-4">
+          <ul class="list-inline quicklinks">
+            <li class="list-inline-item">
+              <a href="./legal.html">Términos y condiciones</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <!-- WhatsApp Icon -->
+  <a 
+    href="https://wa.me/+5493435027187?text=Hola,%20quisiera%20saber..." 
+    target="_blank"
+    class="wp-icon fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full px-4 py-2 shadow-lg scale-on-hover focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 cursor-pointer"
+    aria-label="Contactar por WhatsApp"
+  >
+    <span>
+      <i class="fab fa-whatsapp text-5xl"></i>
+    </span>
+  </a>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="assets/js/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="assets/js/agency.min.js"></script>
+
+  <script>
+    // Configuración global
+    const API_URL = 'http://localhost:3000'; // Cambiar a tu URL de producción en producción
+  </script>
+  <script src="./mercadopago.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Obtener ID de orden de los parámetros URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const orderId = urlParams.get('order_id');
+      
+      if (orderId) {
+        document.getElementById('order-id').textContent = orderId;
+        
+        // Cargar detalles de la orden
+        window.MPCheckout.getOrderStatus(orderId)
+          .then(orderData => {
+            document.getElementById('order-status').textContent = orderData.status === 'completed' ? 'Completado' : orderData.status;
+            document.getElementById('membership-type').textContent = orderData.membership_type || 'No disponible';
+            document.getElementById('order-date').textContent = new Date(orderData.created_at).toLocaleString();
+          })
+          .catch(error => {
+            console.error('Error al cargar detalles de la orden:', error);
+          });
+      } else {
+        document.getElementById('payment-details').innerHTML = '<p class="text-red-500">No se pudo obtener información del pago.</p>';
+      }
+    });
+  </script>
+</body>
+
+</html>
