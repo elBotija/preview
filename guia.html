@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía para redactar un memorial - Quiero recordarte</title>
+  
+  <!-- Bootstrap core CSS -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/all.min.css" rel="stylesheet" type="text/css">
+  <!-- Usando la versión compilada de Tailwind en lugar del CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+  
+  <!-- Custom styles -->
+  <link href="assets/css/agency.css" rel="stylesheet">
+
+  <style>
+    .collapse.navbar-collapse {
+      visibility: inherit;
+    }
+    
+    /* Estilos específicos para la guía */
+    .guide-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .section-card {
+      border-radius: 0.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    
+    .section-header {
+      padding: 1.5rem;
+      background-color: #E1E5CD;
+      color: #00524b;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .section-content {
+      padding: 1.5rem;
+      background-color: white;
+    }
+    
+    .question-block {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #E1E5CD;
+    }
+    
+    .question-block:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .tip-box {
+      background-color: #f8f9fa;
+      border-left: 4px solid #00524b;
+      padding: 1rem;
+      margin: 1.5rem 0;
+    }
+    
+    /* Barra de progreso fija en la parte superior */
+    .progress-bar-container {
+      position: fixed;
+      top: 90px;
+      left: 0;
+      right: 0;
+      background-color: white;
+      z-index: 1000;
+      padding: 0.5rem 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid #E1E5CD;
+    }
+    
+    .progress-bar-inner {
+      height: 8px;
+      background-color: #E1E5CD;
+      border-radius: 4px;
+      overflow: hidden;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background-color: #00524b;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    
+    /* Espacio para compensar la barra de progreso fija */
+    .progress-spacer {
+      height: 60px;
+      margin-bottom: 1rem;
+    }
+    
+    .text-guide {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    
+    .text-guide.active {
+      max-height: 1000px;
+    }
+    
+    .text-guide-toggle {
+      display: inline-block;
+      margin-top: 0.5rem;
+      color: #00524b;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    
+    .text-guide-toggle:hover {
+      text-decoration: underline;
+    }
+    
+    /* Estilos para los botones */
+    .action-button {
+      background-color: #00524b;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.375rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .action-button:hover {
+      background-color: #003d38;
+    }
+    
+    .action-button i {
+      margin-right: 0.5rem;
+    }
+    
+    /* Estilos para el resumen del memorial */
+    .memorial-compiled {
+      background-color: #f9f9f9;
+      border-radius: 0.5rem;
+      padding: 2rem;
+      margin-top: 1.5rem;
+      border: 1px solid #E1E5CD;
+    }
+    
+    .memorial-compiled h3 {
+      color: #00524b;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid #E1E5CD;
+      padding-bottom: 0.75rem;
+    }
+    
+    .memorial-section {
+      margin-bottom: 2rem;
+    }
+    
+    .memorial-section h4 {
+      color: #00524b;
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    
+    .memorial-section p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    
+    @media (max-width: 768px) {
+      .guide-container {
+        padding: 1rem;
+      }
+      
+      .section-header,
+      .section-content {
+        padding: 1rem;
+      }
+      
+      .progress-bar-container {
+        top: 60px;
+      }
+      
+      .memorial-compiled {
+        padding: 1rem;
+      }
+    }
+    
+    /* Estilos para impresión (PDF) */
+    @media print {
+      nav, footer, .wp-icon, #download-pdf, #copy-compiled {
+        display: none !important;
+      }
+      
+      body {
+        font-size: 12pt;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .guide-container {
+        max-width: 100%;
+        padding: 0;
+      }
+      
+      .section-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+      }
+      
+      textarea {
+        border: none;
+        resize: none;
+        height: auto;
+        overflow: visible;
+      }
+      
+      .text-guide-toggle {
+        display: none;
+      }
+      
+      .text-guide {
+        max-height: none;
+        display: block;
+      }
+      
+      .text-guide.active {
+        max-height: none;
+      }
+      
+      .progress-bar-container, 
+      .progress-spacer {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top " id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger qr-font flex items-center" href="./"> 
+        <span class="logo-icon"></span> 
+        <p class="pl-4 mb-0 !leading-6 md:!leading-7">Quiero <br>recordarte</p>
+      </a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav text-uppercase ml-auto">
+          <li class="nav-item md:pl-4"><a class="nav-link js-scroll-trigger" href="./#planes">Membresías</a></li>
+          <li class="nav-item md:pl-4"><a class="nav-link js-scroll-trigger" href="./#quienes-somos">Sobre Nosotros</a></li>
+          <li class="nav-item md:pl-4"><a class="nav-link js-scroll-trigger" href="./#faq">Preguntas frecuentes</a></li>
+          <li class="nav-item md:pl-4"><a class="nav-link js-scroll-trigger" href="./#contacto">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header with smaller height -->
+  <header class="masthead " style="background: none; height: 30vh; min-height: 240px; padding-top: 60px;">
+    <div class="container">
+      <div class="intro-text">
+        <div class="w-full md:w-8/12 mx-auto py-4 rounded-xl">
+          <div class="text-center">
+            <h2 style="color:#00524b" class="text-center text-3xl md:text-5xl text-[#00524b] font-bold mb-4 qr-font">Guía para Redactar un Memorial</h2>
+            <p class="text-lg md:text-xl text-gray-700">Ayudándote a preservar los recuerdos más valiosos de tu ser querido</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Barra de progreso fija -->
+  <div class="progress-bar-container">
+    <div class="container">
+      <div class="progress-bar-inner">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Espacio para compensar la barra fija -->
+  <div class="progress-spacer"></div>
+  
+  <div class="container mt-8 mb-16">
+    <!-- Introduction -->
+    <div class="guide-container">
+      <div class="section-card">
+        <div class="section-header">
+          <h2 class="text-2xl font-semibold">Introducción</h2>
+        </div>
+        <div class="section-content">
+          <p class="mb-4">Sabemos que redactar un memorial para un ser querido puede ser una tarea emocionalmente difícil. Esta guía te ayudará a organizar tus pensamientos y recuerdos para crear un homenaje significativo y personal.</p>
+          <p class="mb-4">Hemos estructurado el proceso en secciones para hacerlo más sencillo. No es necesario completar todos los apartados, y puedes adaptar las preguntas a tu situación particular.</p>
+          <p>Recuerda que no hay una forma "correcta" de escribir un memorial. Lo más importante es que refleje la esencia de tu ser querido y los recuerdos que deseas preservar.</p>
+          
+          <div class="tip-box mt-6">
+            <h4 class="font-semibold mb-2"><i class="fas fa-lightbulb text-[#00524b] mr-2"></i>Consejo útil</h4>
+            <p>Antes de comenzar, te recomendamos reunir algunas fotografías significativas y tal vez reproducir música que le gustaba a tu ser querido para crear un ambiente propicio para la reflexión.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 1: Basic Information -->
+      <div class="section-card" id="section-1">
+        <div class="section-header">
+          <h2 class="text-2xl font-semibold">1. Información Básica</h2>
+        </div>
+        <div class="section-content">
+          <p class="mb-4">Comienza con los datos fundamentales que identifican a tu ser querido.</p>
+          
+          <div class="question-block">
+            <h4 class="font-semibold mb-2">Nombre completo</h4>
+            <p class="text-gray-600 mb-2">¿Cómo se llamaba? ¿Tenía algún segundo nombre? ¿Utilizaba algún apodo o nombre familiar?</p>
+            <textarea class="w-full p-2 border rounded-lg" rows="2" placeholder="Escribe aquí..."></textarea>
+          </div>
+          
+          <div class="question-block">
+            <h4 class="font-semibold mb-2">Fechas importantes</h4>
+            <p class="text-gray-600 mb-2">Fecha de nacimiento y fallecimiento. También puedes incluir otras fechas relevantes como aniversarios, graduaciones o logros significativos.</p>
+            <textarea class="w-full p-2 border rounded-lg" rows="3" placeholder="Escribe aquí..."></textarea>
+          </div>
+          
+          <div class="question-block">
+            <h4 class="font-semibold mb-2">Lugares significativos</h4>
+            <p class="text-gray-600 mb-2">¿Dónde nació? ¿Dónde vivió? ¿Qué lugares fueron especiales para él/ella?</p>
+            <textarea class="w-full p-2 border rounded-lg" rows="3" placeholder="Escribe aquí..."></textarea>
+          </div>
+          
+          <div class="tip-box">
+            <h4 class="font-semibold mb-2"><i class="fas fa-lightbulb text-[#00524b] mr-2"></i>Consejo útil</h4>
+            <p>Incluir una frase o cita favorita de tu ser querido puede ser una hermosa forma de capturar su esencia. Si tienes una, considérala para la introducción del memorial.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Personal Story -->
+      <div class="section-card" id="section-2">
+        <div class="section-header">
+          <h2 class="text-2xl font-semibold">2. Historia Personal</h2>
+        </div>
+        <div class="section-content">
+          <p class="mb-4">Explora la vida de tu ser querido a través de diferentes etapas. No es necesario seguir un orden estrictamente cronológico.</p>
+          
+          <div class="question-block">
+            <h4 class="font-semibold mb-2">Primeros años e infancia</h4>
+            <p class="text-gray-600 mb-2">¿Cómo fue su infancia? ¿Qué anécdotas de su niñez recordaba con cariño? ¿Tuvo alguna experiencia formativa durante esta etapa?</p>
+            <textarea class="w-full p-2 border rounded-lg" rows="4" placeholder="Escribe aquí..."></textarea>
+            
+            <a class="text-guide-toggle">
+              <i class="fas fa-plus-circle mr-1"></i> Ver ejemplos de redacción
+            </a>
+            <div class="text-guide bg-gray-50 p-0 rounded-lg mt-0">
+              <p class="italic text-gray-700 mb-2 px-4 py-2">"María creció en un pequeño pueblo costero, donde desde niña desarrolló un profundo amor por el mar. Sus padres recuerdan cómo coleccionaba conchas marinas y podía pasar horas observando las olas. A los 8 años, comenzó a escribir cuentos inspirados en criaturas marinas, mostrando desde temprano su creatividad e imaginación."</p>
+              <p class="italic text-gray-700 px-4 py-2">"Carlos fue un niño inquieto y curioso. A menudo desarmaba juguetes para entender cómo funcionaban, lo que exasperaba a sus padres pero anticipaba su futura pasión por la ingeniería. Su abuela solía contar cómo, a los 6 años, arregló el radio de la cocina que todos daban por perdido."</p>
+            </div>
+          </div>
+          
+          <div class="question-block">
+            <h4 class="font-semibold mb-2">Juventud</h4>
+            <p class="text-gray-600 mb-2">¿Qué intereses desarrolló durante su adolescencia? ¿Participó en actividades escolares o comunitarias? ¿Cuáles fueron sus amistades más importantes?</p>
+            <textarea class="w-full p-2 border rounded-lg" rows="4" placeholder="Escribe aquí..."></textarea>
+          </div>
+          
+          <div class="question-block">
+            <h4 class="font-semibold mb-2">Educación y carrera</h4>
+            <p class="text-gray-600 mb-2">¿Qué estudió? ¿A qué se dedicó profesionalmente? ¿Cuáles fueron sus logros laborales más importantes? ¿Tenía alguna vocación o pasión particular?</p>
+            <textarea class="w-full p-2 border rounded-lg" rows="4" placeholder="Escribe aquí..."></textarea>
+          </div>
+          
+          <div class="question-block">
+            <h4 class="font-semibold mb-2">Vida adulta</h4>
+            <p class="text-gray-600 mb-2">¿Formó una familia? ¿Cuáles fueron los momentos más felices o significativos de su vida adulta? ¿Qué desafíos enfrentó y cómo los superó?</p>
+            <textarea class="w-full p-2 border rounded-lg" rows="4" placeholder="Escribe aquí..."></textarea>
+          </div>
+          
+          <div class="tip-box">
+            <h4 class="font-semibold mb-2"><i class="fas fa-lightbulb text-[#00524b] mr-2"></i>Consejo útil</h4>
+            <p>Las anécdotas personales son poderosas. No dudes en incluir pequeñas historias que ilustren la personalidad de tu ser querido. Los momentos cotidianos suelen revelar mucho sobre quién era realmente esa persona.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Personality & Passions -->
+      <div class="section-card" id="section-3">
+        <div class="section-header">
+          <h2 class="text-2xl font-semibold">3. Personalidad y Pasiones</h2>
+        </div>
+        <div class="section-content">
+          <p class="mb-4">Captura la esencia de quien era tu ser querido más allá de los hechos biográficos.</p>
+          
+          <div class="question-block">
+            <h4 class="font-semibold mb-2">Rasgos de personalidad</h4>
+            <p class="text-gray-600 mb-2">¿Cómo describirías su forma de ser? ¿Qué cualidades admiraban más las personas de él/ella? ¿Tenía alguna peculiaridad o rasgo distintivo?</p>
+            <textarea class="w-full p-2 border rounded-lg" rows="4" placeholder="Escribe aquí..."></textarea>
+          </div>
+          
+          <div class="question-block">
+            <h4 class="font-semibold mb-2">Intereses y pasatiempos</h4>
+            <p class="text-gray-600 mb-2">¿Qué actividades disfrutaba en su tiempo libre? ¿Tenía alguna colección o hobby particular? ¿Practicaba algún deporte o arte?</p>
+            <textarea class="w-full p-2 border rounded-lg" rows="4" placeholder="Escribe aquí..."></textarea>
+            
+            <a class="text-guide-toggle">
+              <i class="fas fa-plus-circle mr-1"></i> Ver ejemplos de redacción
+            </a>
+            <div class="text-guide bg-gray-50 p-0 rounded-lg mt-0">
+              <p class="italic text-gray-700 mb-2 px-4 py-2">"Roberto encontraba paz y alegría en sus largas caminatas por las sierras. Era un ávido senderista que conocía cada sendero de la región. Su mochila siempre estaba lista, equipada con sus binoculares para observar aves, su pasión secreta que pocos conocían. Mantenía un cuaderno donde anotaba meticulosamente cada especie que avistaba, con dibujos detallados que revelaban su sensibilidad artística."</p>
+              <p class="italic text-gray-700 px-4 py-2">"La cocina era el reino de Laura. Allí transformaba ingredientes simples en festines memorables, siempre experimentando con recetas de distintas culturas. Sus domingos de pasta casera eran sagrados para la familia, una tradición que heredó de su abuela italiana y que perfeccionó con los años. No seguía recetas escritas, cocinaba por intuición, con esa sabiduría que solo nace del amor por lo que se hace."</p>
+            </div>
+          </div>
+          
+          <div class="question-block">
+            <h4 class="font-semibold mb-2">Valores y creencias</h4>
+            <p class="text-gray-600 mb-2">¿Qué principios guiaban su vida? ¿Tenía alguna creencia religiosa o espiritual? ¿Qué causas defendía o apoyaba?</p>
+            <textarea class="w-full p-2 border rounded-lg" rows="4" placeholder="Escribe aquí..."></textarea>
+          </div>
+          
+          <div class="question-block">
+            <h4 class="font-semibold mb-2">Gustos y preferencias</h4>
+            <p class="text-gray-600 mb-2">¿Cuál era su comida favorita? ¿Qué música le gustaba escuchar? ¿Tenía películas, libros o lugares predilectos?</p>
+            <textarea class="w-full p-2 border rounded-lg" rows="4" placeholder="Escribe aquí..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: Relationships -->
+      <div class="section-card" id="section-4">
+        <div class="section-header">
+          <h2 class="text-2xl font-semibold">4. Relaciones Personales</h2>
+        </div>
+        <div class="section-content">
+          <p class="mb-4">Explora las conexiones significativas que formaron parte de la vida de tu ser querido.</p>
+          
+          <div class="question-block">
+            <h4 class="font-semibold mb-2">Familia</h4>
+            <p class="text-gray-600 mb-2">¿Cómo era como padre/madre, hijo/a, hermano/a? ¿Qué tradiciones familiares valoraba? ¿Hay anécdotas familiares especiales que quieras compartir?</p>
+            <textarea class="w-full p-2 border rounded-lg" rows="4" placeholder="Escribe aquí..."></textarea>
+          </div>
+          
+          <div class="question-block">
+            <h4 class="font-semibold mb-2">Amistades</h4>
+            <p class="text-gray-600 mb-2">¿Cómo era como amigo/a? ¿Tenía un círculo amplio o prefería pocas amistades cercanas? ¿Hay alguna amistad que fuera particularmente significativa?</p>
+            <textarea class="w-full p-2 border rounded-lg" rows="4" placeholder="Escribe aquí..."></textarea>
+          </div>
+          
+          <div class="question-block">
+            <h4 class="font-semibold mb-2">Comunidad</h4>
+            <p class="text-gray-600 mb-2">¿Participaba en alguna comunidad o grupo? ¿Realizaba trabajo voluntario? ¿Cómo contribuía a su entorno social?</p>
+            <textarea class="w-full p-2 border rounded-lg" rows="4" placeholder="Escribe aquí..."></textarea>
+          </div>
+          
+          <div class="tip-box">
+            <h4 class="font-semibold mb-2"><i class="fas fa-lightbulb text-[#00524b] mr-2"></i>Consejo útil</h4>
+            <p>Considera incluir citas o anécdotas de familiares y amigos cercanos. Estas perspectivas adicionales pueden enriquecer enormemente el memorial y mostrar el impacto que tuvo en diferentes personas.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 5: Legacy & Remembrance -->
+      <div class="section-card" id="section-5">
+        <div class="section-header">
+          <h2 class="text-2xl font-semibold">5. Legado y Conmemoración</h2>
+        </div>
+        <div class="section-content">
+          <p class="mb-4">Reflexiona sobre el impacto duradero y la forma en que quieres honrar la memoria de tu ser querido.</p>
+          
+          <div class="question-block">
+            <h4 class="font-semibold mb-2">Legado</h4>
+            <p class="text-gray-600 mb-2">¿Qué huella dejó en este mundo? ¿Qué enseñanzas o valores transmitió a quienes lo/la conocieron? ¿Cómo cambió la vida de otros?</p>
+            <textarea class="w-full p-2 border rounded-lg" rows="4" placeholder="Escribe aquí..."></textarea>
+            
+            <a class="text-guide-toggle">
+              <i class="fas fa-plus-circle mr-1"></i> Ver ejemplos de redacción
+            </a>
+            <div class="text-guide bg-gray-50 p-0 rounded-lg mt-0">
+              <p class="italic text-gray-700 mb-2 px-4 py-2">"El verdadero legado de Antonio no se mide en posesiones materiales, sino en las vidas que tocó con su generosidad y sabiduría. Como maestro durante más de treinta años, inspiró a generaciones de estudiantes a perseguir sus sueños con determinación y ética. Muchos de ellos, hoy profesionales exitosos, atribuyen su vocación a aquellas conversaciones en el aula donde Antonio veía potencial donde ni ellos mismos lo encontraban."</p>
+              <p class="italic text-gray-700 px-4 py-2">"Silvia nos enseñó que la verdadera fortaleza reside en la capacidad de mantener la alegría incluso en los momentos difíciles. Su optimismo inquebrantable frente a la adversidad transformó no solo su propia vida, sino la de todos los que la rodeaban. Nos dejó la lección más valiosa: vivir cada día con gratitud y encontrar belleza en lo cotidiano."</p>
+            </div>
+          </div>
+          
+          <div class="question-block">
+            <h4 class="font-semibold mb-2">Palabras finales</h4>
+            <p class="text-gray-600 mb-2">¿Hay algo especial que quieras expresar a modo de despedida? ¿Algún mensaje que creas que le hubiera gustado transmitir?</p>
+            <textarea class="w-full p-2 border rounded-lg" rows="4" placeholder="Escribe aquí..."></textarea>
+          </div>
+          
+          <div class="question-block">
+            <h4 class="font-semibold mb-2">Formas de honrar su memoria</h4>
+            <p class="text-gray-600 mb-2">¿Hay alguna forma especial en que quieras que las personas recuerden a tu ser querido? ¿Alguna causa o actividad que le hubiera gustado que apoyaran en su nombre?</p>
+            <textarea class="w-full p-2 border rounded-lg" rows="4" placeholder="Escribe aquí..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Final Tips -->
+      <div class="section-card">
+        <div class="section-header">
+          <h2 class="text-2xl font-semibold">Consejos Finales</h2>
+        </div>
+        <div class="section-content">
+          <div class="space-y-4">
+            <div>
+              <h4 class="font-semibold"><i class="fas fa-pen text-[#00524b] mr-2"></i>Sé auténtico</h4>
+              <p>Escribe desde el corazón, con palabras sinceras y personales. No te preocupes por sonar "literario" o formal.</p>
+            </div>
+            
+            <div>
+              <h4 class="font-semibold"><i class="fas fa-balance-scale text-[#00524b] mr-2"></i>Busca equilibrio</h4>
+              <p>Intenta reflejar tanto los momentos de alegría como los desafíos superados, para mostrar una imagen completa y humana.</p>
+            </div>
+            
+            <div>
+              <h4 class="font-semibold"><i class="fas fa-edit text-[#00524b] mr-2"></i>Revisa y edita</h4>
+              <p>Después de escribir, tómate un tiempo para revisar el texto. A veces, al releerlo, surgen nuevos recuerdos o formas mejores de expresar ciertas ideas.</p>
+            </div>
+            
+            <div>
+              <h4 class="font-semibold"><i class="fas fa-users text-[#00524b] mr-2"></i>Considera otras voces</h4>
+              <p>Si es posible, comparte el borrador con otros familiares o amigos cercanos. Pueden aportar perspectivas o recuerdos que enriquezcan el memorial.</p>
+            </div>
+            
+            <div>
+              <h4 class="font-semibold"><i class="fas fa-heart text-[#00524b] mr-2"></i>Cuida de ti mismo</h4>
+              <p>Escribir un memorial puede despertar emociones intensas. Tómate descansos cuando lo necesites y reconoce que este proceso puede ser parte de tu camino de duelo.</p>
+            </div>
+          </div>
+          
+          <div class="mt-8 p-4 bg-[#E1E5CD] rounded-lg">
+            <h3 class="text-xl font-semibold text-[#00524b] mb-3">¿Necesitas ayuda adicional?</h3>
+            <p class="mb-4">Si tienes dificultades para redactar el memorial o necesitas asistencia en el proceso, nuestro equipo está disponible para ayudarte.</p>
+            <a href="./#contacto" class="inline-block bg-[#00524b] text-white px-4 py-2 rounded-lg hover:bg-[#003d38] transition-colors">Contactar al equipo de soporte</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Compiled Text Section -->
+      <div class="section-card mt-12">
+        <div class="section-header">
+          <h2 class="text-2xl font-semibold">Memorial Compilado</h2>
+        </div>
+        <div class="section-content">
+          <p class="mb-4">A medida que completes las secciones anteriores, verás aquí un resumen de todo el texto ingresado. Podrás copiarlo para usarlo cuando crees el memorial digital.</p>
+          
+          <div id="compiled-text">
+            <!-- Aquí se mostrará el texto compilado -->
+          </div>
+          
+          <!-- Textarea oculto para facilitar la copia -->
+          <textarea id="plain-text-content" class="hidden"></textarea>
+        </div>
+      </div>
+      
+      <!-- Download Button -->
+      <div class="mt-8 text-center">
+        <a href="#" id="download-pdf" class="action-button">
+          <i class="fas fa-download"></i> Imprimir/Guardar como PDF
+        </a>
+        <p class="mt-2 text-gray-600">Guarda este recurso para consultarlo cuando lo necesites</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="background: #b8c4ba" class="footer bg-[#b8c4ba]">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-4">
+          <span class="copyright">Copyright &copy; Quiero recordarte 2024</span>
+        </div>
+        <!-- Social Media -->
+        <div class="col-md-4">
+          <ul class="list-inline social-buttons">
+            <li class="list-inline-item">
+              <a href="https://www.facebook.com/quierorecordarteqr" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://www.instagram.com/quierorecordarteqr/" target="_blank">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Legal -->
+        <div class="col-md-4">
+          <ul class="list-inline quicklinks">
+            <li class="list-inline-item">
+              <a href="./legal.html">Términos y condiciones</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Icon -->
+  <a 
+    href="https://wa.me/+5493435027187?text=Hola,%20quisiera%20ayuda%20para%20redactar%20un%20memorial..." 
+    target="_blank"
+    class="wp-icon fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full px-4 py-2 shadow-lg scale-on-hover focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 cursor-pointer"
+    aria-label="Contactar por WhatsApp"
+  >
+    <span>
+      <i class="fab fa-whatsapp text-5xl"></i>
+    </span>
+  </a>
+
+  <!-- Bootstrap & other scripts -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/jquery.easing.min.js"></script>
+  <script src="assets/js/agency.min.js"></script>
+
+  <!-- Custom script for the guide -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Toggle text guides
+      const toggleButtons = document.querySelectorAll('.text-guide-toggle');
+      toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const guide = this.nextElementSibling;
+          guide.classList.toggle('active');
+          
+          // Change icon and text
+          if (guide.classList.contains('active')) {
+            this.innerHTML = '<i class="fas fa-minus-circle mr-1"></i> Ocultar ejemplos';
+          } else {
+            this.innerHTML = '<i class="fas fa-plus-circle mr-1"></i> Ver ejemplos de redacción';
+          }
+        });
+      });
+      
+      // Track scroll progress - Fix para el error en el scroll
+      const progressFill = document.querySelector('.progress-fill');
+      function updateScrollProgress() {
+        if (progressFill) {
+          const windowHeight = window.innerHeight;
+          const documentHeight = document.documentElement.scrollHeight - windowHeight;
+          const scrollTop = window.scrollY;
+          const progress = (scrollTop / documentHeight) * 100;
+          
+          progressFill.style.width = progress + '%';
+        }
+      }
+      
+      window.addEventListener('scroll', updateScrollProgress);
+      updateScrollProgress(); // Initialize on load
+      
+      // Save textarea content to localStorage
+      const textareas = document.querySelectorAll('textarea');
+      textareas.forEach((textarea, index) => {
+        // Load saved content if exists
+        const savedContent = localStorage.getItem(`memorial-guide-textarea-${index}`);
+        if (savedContent) {
+          textarea.value = savedContent;
+        }
+        
+        // Save content on change
+        textarea.addEventListener('input', function() {
+          localStorage.setItem(`memorial-guide-textarea-${index}`, this.value);
+          // Actualizar el resumen compilado cuando hay cambios
+          updateCompiledText();
+        });
+      });
+      
+      // Función para imprimir o guardar como PDF
+      document.getElementById('download-pdf').addEventListener('click', function(e) {
+        e.preventDefault();
+        window.print();
+      });
+      
+      // Función para compilar todo el texto ingresado en un formato narrativo
+      function updateCompiledText() {
+        const compiledTextElement = document.getElementById('compiled-text');
+        
+        // Obtenemos todos los valores de los textareas
+        const textareaValues = {};
+        const sectionsData = {
+          'section-1': { title: 'Información Básica', fields: ['Nombre completo', 'Fechas importantes', 'Lugares significativos'] },
+          'section-2': { title: 'Historia Personal', fields: ['Primeros años e infancia', 'Juventud', 'Educación y carrera', 'Vida adulta'] },
+          'section-3': { title: 'Personalidad y Pasiones', fields: ['Rasgos de personalidad', 'Intereses y pasatiempos', 'Valores y creencias', 'Gustos y preferencias'] },
+          'section-4': { title: 'Relaciones Personales', fields: ['Familia', 'Amistades', 'Comunidad'] },
+          'section-5': { title: 'Legado y Conmemoración', fields: ['Legado', 'Palabras finales', 'Formas de honrar su memoria'] }
+        };
+        
+        // Recopilamos los valores
+        Object.keys(sectionsData).forEach(sectionId => {
+          const textareas = document.querySelectorAll(`#${sectionId} textarea`);
+          textareas.forEach((textarea, index) => {
+            if (textarea.value.trim()) {
+              const fieldName = sectionsData[sectionId].fields[index];
+              textareaValues[fieldName] = textarea.value.trim();
+            }
+          });
+        });
+        
+        // Creamos el HTML para el memorial compilado
+        let compiledHTML = '<div class="memorial-compiled">';
+        compiledHTML += '<h3 class="text-2xl font-semibold text-center">Memorial Completo</h3>';
+        
+        // Versión para texto plano (para copiar)
+        let plainTextVersion = '';
+        
+        // Agregamos cada sección
+        Object.keys(sectionsData).forEach(sectionId => {
+          const section = sectionsData[sectionId];
+          let sectionHasContent = false;
+          let sectionContent = '';
+          
+          section.fields.forEach(field => {
+            if (textareaValues[field]) {
+              sectionHasContent = true;
+              sectionContent += `<p><strong>${field}:</strong> ${textareaValues[field]}</p>`;
+              plainTextVersion += `${field}: ${textareaValues[field]}\n\n`;
+            }
+          });
+          
+          if (sectionHasContent) {
+            compiledHTML += `
+              <div class="memorial-section">
+                <h4>${section.title}</h4>
+                ${sectionContent}
+              </div>
+            `;
+            plainTextVersion += '\n';
+          }
+        });
+        
+        // Versión narrativa (ejemplo para Información Básica)
+        let narrativeVersion = '';
+        if (textareaValues['Nombre completo']) {
+          narrativeVersion += textareaValues['Nombre completo'];
+          
+          if (textareaValues['Fechas importantes']) {
+            narrativeVersion += ` (${textareaValues['Fechas importantes']})`;
+          }
+          
+          narrativeVersion += '. ';
+          
+          if (textareaValues['Lugares significativos']) {
+            narrativeVersion += textareaValues['Lugares significativos'];
+          }
+        }
+        
+        document.getElementById('plain-text-content').value = plainTextVersion;
+        
+        compiledHTML += `
+          <div class="mt-6 pt-4 border-t border-gray-200">
+            <p class="text-gray-600 mb-4">Esta es la versión compilada de tu memorial. Puedes copiar este texto cuando crees el memorial digital.</p>
+            <button id="copy-compiled" class="action-button">
+              <i class="fas fa-copy"></i> Copiar texto completo
+            </button>
+          </div>
+        </div>`;
+        
+        compiledTextElement.innerHTML = compiledHTML;
+        
+        // Agregar funcionalidad al botón de copiar
+        document.getElementById('copy-compiled').addEventListener('click', function() {
+          const plainTextContent = document.getElementById('plain-text-content');
+          plainTextContent.select();
+          document.execCommand('copy');
+          
+          // Feedback visual
+          this.innerHTML = '<i class="fas fa-check"></i> ¡Texto copiado!';
+          setTimeout(() => {
+            this.innerHTML = '<i class="fas fa-copy"></i> Copiar texto completo';
+          }, 2000);
+        });
+      }
+      
+      // Inicializar el texto compilado
+      updateCompiledText();
+    });
+  </script>
+</body>
+</html>
